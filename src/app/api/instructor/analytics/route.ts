@@ -29,18 +29,18 @@ export async function GET() {
       },
     })
 
-    const totalRevenue = courses.reduce((acc, course) => {
+    const totalRevenue = courses.reduce((acc: number, course) => {
       const courseRevenue = course.enrollments.length * course.price
       return acc + courseRevenue
     }, 0)
 
-    const totalEnrollments = courses.reduce((acc, course) => {
+    const totalEnrollments = courses.reduce((acc: number, course) => {
       return acc + course.enrollments.length
     }, 0)
 
-    const averageRating = courses.reduce((acc, course) => {
+    const averageRating = courses.reduce((acc: number, course) => {
       const courseAvg =
-        course.reviews.reduce((sum, review) => sum + review.rating, 0) /
+        course.reviews.reduce((sum: number, review) => sum + review.rating, 0) /
         (course.reviews.length || 1)
       return acc + courseAvg
     }, 0) / (courses.length || 1)

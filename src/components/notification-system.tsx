@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useEffect } from "react"
 import { toast } from "sonner"
 import { CheckCircle, X, Bell, AlertCircle, Info } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 interface Notification {
   id: string
@@ -40,32 +41,41 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [isVisible, setIsVisible] = useState(false)
 
-  // Auto-hide notifications after 5 seconds
-  useEffect(() => {
-    if (notifications.length > 0) {
-      const timer = setTimeout(() => {
-        const firstNotification = notifications[0]
-        if (firstNotification && !firstNotification.isRead) {
-          setNotifications(prev => 
-            prev.map(notification => 
-              notification.id === firstNotification.id 
-                ? { ...notification, isRead: true }
-                : notification
-            )
-          )
-        }, 5000)
-
-      return () => clearTimeout(timer)
+  const addNotification = (notification: Omit<Notification, 'id'>) => {
+    const newNotification: Notification = {
+      ...notification,
+      id: Date.now().toString(),
+      timestamp: Date.now(),
+      isRead: false
     }
-  }, [notifications])
+    setNotifications(prev => [...prev, newNotification])
+  }
 
-  const value = useContext(NotificationContext)
+  const markAsRead = (id: string) => {
+    setNotifications(prev => 
+      prev.map(notification => 
+        notification.id === id 
+          ? { ...notification, isRead: true }
+          : notification
+      )
+    )
+  }
 
-  useEffect(() => {
-    if (!value) {
-      throw new Error('NotificationProvider must be used within a useNotifications context')
-    }
-  }, [value])
+  const clearNotifications = () => {
+    setNotifications([])
+  }
+
+  const getUnreadCount = () => {
+    return notifications.filter(n => !n.isRead).length
+  }
+
+  const value: NotificationContextType = {
+    notifications,
+    addNotification,
+    markAsRead,
+    clearNotifications,
+    getUnreadCount
+  }
 
   return (
     <NotificationContext.Provider value={value}>
@@ -131,12 +141,12 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
                       notification.type === 'warning' ? 'bg-yellow-100' :
                       notification.type === 'info' ? 'bg-blue-100' : 'bg-gray-100'
                     }`}
-                  >
-                    {notification.type === 'success' && <CheckCircle className="h-6 w-6 text-green-600" />}
-                    {notification.type === 'error' && <X className="h-6 w-6 text-red-600" />}
-                    {notification.type === 'warning' && <AlertCircle className="h-6 w-6 text-yellow-600" />}
-                    {notification.type === 'info' && <Info className="h-6 w-6 text-blue-600" />}
-                  </div>
+                    >
+                      {notification.type === 'success' && <CheckCircle className="h-6 w-6 text-green-600" />}
+                      {notification.type === 'error' && <X className="h-6 w-6 text-red-600" />}
+                      {notification.type === 'warning' && <AlertCircle className="h-6 w-6 text-yellow-600" />}
+                      {notification.type === 'info' && <Info className="h-6 w-6 text-blue-600" />}
+                    </div>
 
                     <div className="flex-1">
                       <div>
@@ -145,96 +155,39 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
                           {new Date(notification.timestamp).toLocaleTimeString()}
                         </div>
                       </div>
-                      </div>
+                      <div className="text-sm text-gray-600 mt-1">{notification.message}</div>
+                      
+                      {notification.action && (
+                        <div className="flex items-center gap-2 mt-2">
+                          <button
+                            onClick={notification.action.onClick}
+                            className="text-xs text-blue-600 hover:text-blue-800 underline"
+                          >
+                            {notification.action.label}
+                          </button>
+                        </div>
+                      )}
                     </div>
-
-                    <div className="text-sm text-gray-600 mb-2">{notification.message}</div>
-                    
-                    {notification.action && (
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={notification.action.onClick}
-                          className="text-xs text-blue-600 hover:text-blue-800 underline"
-                        >
-                          {notification.action.label}
-                        </button>
-                      </div>
-                    )}
                   </div>
                 </div>
-              </div>
-              ))
-            )
+              ))}
+            </div>
           </div>
         )}
       </div>
 
       {/* Success Toast */}
-      <div className={`fixed bottom-4 left-1/2 transform -translate-x-0 transition-transform duration-300 ${
+      <div className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 transition-transform duration-300 ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
       }`}>
         <div className="bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg flex items-center gap-3">
-          <CheckCircle className="h-6 w-6 text-green-600" />
+          <CheckCircle className="h-6 w-6 text-white" />
           <div>
             <div className="font-medium">Payment Successful!</div>
-            <div className="text-sm">{courseTitle} enrollment completed</div>
+            <div className="text-sm">Enrollment completed</div>
           </div>
         </div>
       </div>
-
-      {/* Notification CSS */}
-      <style jsx>{`
-        @keyframes slideIn {
-          from {
-            transform: translateX(100%);
-          }
-          to {
-            transform: translateX(0%);
-          }
-        }
-        }
-
-        @keyframes slideOut {
-          from {
-            transform: translateX(100%);
-          }
-          to {
-            transform: translateX(-100%);
-          }
-        }
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        .notification-item {
-          animation: slideIn 0.3s ease-out;
-        }
-
-        .notification-item:hover {
-          animation: none;
-          transform: scale(1.02);
-        }
-
-        .notification-enter {
-          animation: slideIn 0.3s ease-out;
-        }
-
-        .notification-exit {
-          animation: slideOut 0.3s ease-out forwards;
-        }
-
-        .success-toast {
-          animation: fadeIn 0.3s ease-out;
-        }
-      `}</style>
     </NotificationContext.Provider>
-    </div>
   )
 }
