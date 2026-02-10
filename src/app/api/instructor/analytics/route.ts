@@ -50,7 +50,7 @@ export async function GET() {
       totalEnrollments,
       totalCourses: courses.length,
       averageRating: averageRating.toFixed(1),
-      courses: courses.map((course) => ({
+      courses: courses.map((course: any) => ({
         id: course.id,
         title: course.title,
         description: course.description,
@@ -59,7 +59,7 @@ export async function GET() {
         enrollments: course.enrollments.length,
         revenue: course.enrollments.length * course.price,
         rating:
-          course.reviews.reduce((sum, review) => sum + review.rating, 0) /
+          course.reviews.reduce((sum: number, review: any) => sum + review.rating, 0) /
           (course.reviews.length || 1),
         category: course.category,
         _count: {
