@@ -7,23 +7,7 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-enum UserRole {
-  STUDENT
-  INSTRUCTOR
-  ADMIN
-}
 
-enum CourseLevel {
-  BEGINNER
-  INTERMEDIATE
-  ADVANCED
-}
-
-enum QuizQuestionType {
-  MULTIPLE_CHOICE
-  TRUE_FALSE
-  CODE_CHALLENGE
-}
 
 model User {
   id            String    @id @default(cuid())
@@ -32,7 +16,7 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
-  role          UserRole  @default(STUDENT)
+  role          String    @default("STUDENT")
   bio           String?
   
   accounts      Account[]
@@ -58,12 +42,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -93,11 +77,11 @@ model Course {
   id          String      @id @default(cuid())
   title       String
   slug        String      @unique
-  description String      @db.Text
+  description String
   imageUrl    String?
   price       Float       @default(0)
   isPublished Boolean     @default(false)
-  level       CourseLevel @default(BEGINNER)
+  level       String       @default("BEGINNER")
   
   categoryId  String
   category    Category    @relation(fields: [categoryId], references: [id])
@@ -119,7 +103,7 @@ model Course {
 model Chapter {
   id          String   @id @default(cuid())
   title       String
-  description String?  @db.Text
+  description String?
   position    Int
   isPublished Boolean  @default(false)
   isFree      Boolean  @default(false)
@@ -138,13 +122,13 @@ model Chapter {
 model Lesson {
   id          String   @id @default(cuid())
   title       String
-  description String?  @db.Text
+  description String?
   videoUrl    String?
   duration    Int?     // in seconds
   position    Int
   isPublished Boolean  @default(false)
   isFree      Boolean  @default(false)
-  content     String?  @db.Text // For text-based lessons
+  content     String? // For text-based lessons
   
   chapterId   String
   chapter     Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
@@ -213,11 +197,11 @@ model Quiz {
 
 model QuizQuestion {
   id          String            @id @default(cuid())
-  question    String            @db.Text
-  type        QuizQuestionType
-  options     String[]          // JSON array for multiple choice
+  question    String
+  type        String            @default("MULTIPLE_CHOICE")
+  options     String            // JSON string for multiple choice
   correctAnswer String
-  explanation String?           @db.Text
+  explanation String?
   points      Int               @default(1)
   position    Int
   
@@ -233,7 +217,7 @@ model QuizQuestion {
 model QuizAttempt {
   id          String   @id @default(cuid())
   score       Float    // percentage
-  answers     Json     // Store user answers
+  answers     String   // Store user answers as JSON string
   isPassed    Boolean
   
   userId      String
@@ -251,7 +235,7 @@ model QuizAttempt {
 model Review {
   id          String   @id @default(cuid())
   rating      Int      // 1-5
-  comment     String?  @db.Text
+  comment     String?
   
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)

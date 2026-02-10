@@ -64,7 +64,7 @@ export async function GET(
     }
 
     // Return questions without correct answers for taking the quiz
-    const questionsWithoutAnswers = quiz.questions.map((q) => ({
+    const questionsWithoutAnswers = quiz.questions.map((q: any) => ({
       id: q.id,
       question: q.question,
       type: q.type,
