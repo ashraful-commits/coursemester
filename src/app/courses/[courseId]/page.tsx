@@ -281,11 +281,11 @@ export default function CourseDetail({
       </div>
 
       {/* Course Hero */}
-      <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 z-10 overflow-hidden">
+      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-24 lg:pt-40 lg:pb-32 z-10 overflow-hidden">
         <div className="container mx-auto px-4">
           <Link
             href="/courses"
-            className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-primary hover:text-primary/80 transition-all mb-12 group"
+            className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-black uppercase tracking-widest text-primary hover:text-primary/80 transition-all mb-8 sm:mb-12 group"
           >
             <div className="w-8 h-8 rounded-full glass flex items-center justify-center group-hover:-translate-x-1 transition-transform">
               <ChevronLeft className="h-4 w-4" />
@@ -293,66 +293,66 @@ export default function CourseDetail({
             Universal Catalog
           </Link>
 
-          <div className="grid lg:grid-cols-12 gap-16 items-start">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             <div className="lg:col-span-8">
-              <div className="flex flex-wrap items-center gap-3 mb-8">
-                <Badge variant="outline" className="border-primary/30 text-primary font-black uppercase tracking-widest px-4 py-1 glass">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+                <Badge variant="outline" className="border-primary/30 text-primary font-black uppercase tracking-widest px-3 sm:px-4 py-1 glass text-[8px] sm:text-[9px]">
                   {course.category.name}
                 </Badge>
-                <Badge variant="outline" className="border-white/10 text-muted-foreground font-black uppercase tracking-widest px-4 py-1 glass">
+                <Badge variant="outline" className="border-white/10 text-muted-foreground font-black uppercase tracking-widest px-3 sm:px-4 py-1 glass text-[8px] sm:text-[9px]">
                   {course.level} Tier
                 </Badge>
               </div>
 
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-[1.1] tracking-tighter animate-fadeInUp">
+              <h1 className="text-3xl xs:text-5xl lg:text-7xl font-black mb-6 sm:mb-8 leading-[1.1] tracking-tighter animate-fadeInUp">
                 {course.title.split(' ').slice(0, -1).join(' ')} <span className="text-gradient">{course.title.split(' ').pop()}</span>
               </h1>
 
-              <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl font-medium leading-relaxed animate-fadeInUp delay-100">
+              <p className="text-lg sm:text-2xl text-muted-foreground mb-8 sm:mb-12 max-w-3xl font-medium leading-relaxed animate-fadeInUp delay-100">
                 {course.description}
               </p>
 
-              <div className="flex flex-wrap items-center gap-8 mb-12 animate-fadeInUp delay-200">
-                <div className="flex items-center gap-4">
-                  <div className="relative w-14 h-14 rounded-2xl overflow-hidden border-2 border-primary/20 shadow-xl">
+              <div className="flex flex-wrap items-center gap-6 sm:gap-8 mb-10 sm:mb-12 animate-fadeInUp delay-200">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-primary/20 shadow-xl">
                     <NextImage src={course.instructor.image || ""} alt={course.instructor.name} fill className="object-cover" />
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Architect</p>
-                    <p className="text-lg font-black">{course.instructor.name}</p>
+                    <p className="text-[8px] sm:text-[10px] uppercase font-black text-muted-foreground tracking-widest">Architect</p>
+                    <p className="text-base sm:text-lg font-black">{course.instructor.name}</p>
                   </div>
                 </div>
 
                 <div className="h-10 w-px bg-white/10 hidden sm:block" />
 
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 glass rounded-2xl flex items-center justify-center text-yellow-500">
-                    <Star className="w-6 h-6 fill-current" />
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 glass rounded-xl sm:rounded-2xl flex items-center justify-center text-yellow-500">
+                    <Star className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Global Rating</p>
-                    <p className="text-lg font-black">4.9 <span className="text-sm text-muted-foreground font-medium">/ 5.0</span></p>
+                    <p className="text-[8px] sm:text-[10px] uppercase font-black text-muted-foreground tracking-widest">Global Rating</p>
+                    <p className="text-base sm:text-lg font-black">4.9 <span className="text-xs sm:text-sm text-muted-foreground font-medium">/ 5.0</span></p>
                   </div>
                 </div>
 
                 <div className="h-10 w-px bg-white/10 hidden sm:block" />
 
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 glass rounded-2xl flex items-center justify-center text-primary">
-                    <Users className="w-6 h-6" />
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 glass rounded-xl sm:rounded-2xl flex items-center justify-center text-primary">
+                    <Users className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Deployment</p>
-                    <p className="text-lg font-black">{course._count.enrollments.toLocaleString()}+ <span className="text-sm text-muted-foreground font-medium">Students</span></p>
+                    <p className="text-[8px] sm:text-[10px] uppercase font-black text-muted-foreground tracking-widest">Deployment</p>
+                    <p className="text-base sm:text-lg font-black">{course._count.enrollments.toLocaleString()}+ <span className="text-xs sm:text-sm text-muted-foreground font-medium">Students</span></p>
                   </div>
                 </div>
               </div>
 
-              <div className="flex gap-4 animate-fadeInUp delay-300">
-                <Button variant="secondary" className="glass border-white/10 h-14 px-8 rounded-2xl font-black">
+              <div className="flex gap-3 sm:gap-4 animate-fadeInUp delay-300">
+                <Button variant="secondary" className="glass border-white/10 h-12 sm:h-14 px-6 sm:px-8 rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm">
                   <Share2 className="w-4 h-4 mr-2" /> Share
                 </Button>
-                <Button variant="secondary" className="glass border-white/10 h-14 px-6 rounded-2xl font-black">
+                <Button variant="secondary" className="glass border-white/10 h-12 sm:h-14 px-4 sm:px-6 rounded-xl sm:rounded-2xl font-black">
                   <Heart className="w-4 h-4" />
                 </Button>
               </div>

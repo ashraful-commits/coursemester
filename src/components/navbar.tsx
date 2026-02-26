@@ -309,38 +309,54 @@ export function Navbar() {
                     </Link>
                   </SheetTitle>
                 </SheetHeader>
-                <nav className="flex flex-col gap-2 flex-grow">
+                <nav className="flex flex-col gap-2 flex-grow overflow-y-auto pr-2 custom-scrollbar">
                   {navLinks.map((link) =>
                     (!link.role || session?.user?.role === link.role) ? (
                       <Link
                         key={link.href}
                         href={link.href}
-                        className="flex items-center gap-3 text-[13px] font-black uppercase tracking-[0.15em] text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all p-4 rounded-2xl"
+                        className="flex items-center gap-4 text-[13px] font-black uppercase tracking-[0.15em] text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all p-5 rounded-[2rem] border border-transparent hover:border-primary/10"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
-                        <link.icon className="w-4 h-4 opacity-60" />
+                        <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+                          <link.icon className="w-5 h-5 opacity-60" />
+                        </div>
                         {link.label}
                       </Link>
                     ) : null
                   )}
                   {session && (
                     <>
-                      <Link href="/wishlist" className="flex items-center gap-3 text-[13px] font-black uppercase tracking-[0.15em] text-muted-foreground hover:text-pink-400 hover:bg-pink-400/5 transition-all p-4 rounded-2xl" onClick={() => setIsMobileMenuOpen(false)}>
-                        <Heart className="w-4 h-4 opacity-60" /> Wishlist
+                      <Link href="/wishlist" className="flex items-center gap-4 text-[13px] font-black uppercase tracking-[0.15em] text-muted-foreground hover:text-pink-400 hover:bg-pink-400/5 transition-all p-5 rounded-[2rem]" onClick={() => setIsMobileMenuOpen(false)}>
+                        <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+                          <Heart className="w-5 h-5 opacity-60" />
+                        </div>
+                        Wishlist
                       </Link>
-                      <Link href="/cart" className="flex items-center gap-3 text-[13px] font-black uppercase tracking-[0.15em] text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all p-4 rounded-2xl" onClick={() => setIsMobileMenuOpen(false)}>
-                        <ShoppingCart className="w-4 h-4 opacity-60" /> Cart
+                      <Link href="/cart" className="flex items-center gap-4 text-[13px] font-black uppercase tracking-[0.15em] text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all p-5 rounded-[2rem]" onClick={() => setIsMobileMenuOpen(false)}>
+                        <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+                          <ShoppingCart className="w-5 h-5 opacity-60" />
+                        </div>
+                        Cart
                       </Link>
                     </>
                   )}
+
+                  {/* Appearance section in mobile menu */}
+                  <div className="mt-8 pt-8 border-t border-white/5">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground opacity-50 mb-4 px-4">Customization</p>
+                    <div className="px-4">
+                      <ThemeSelector />
+                    </div>
+                  </div>
                 </nav>
                 {!session && (
-                  <div className="flex flex-col gap-3 pt-10 border-t border-white/5">
+                  <div className="flex flex-col gap-3 pt-10 border-t border-white/5 mt-auto">
                     <Link href="/sign-in" onClick={() => setIsMobileMenuOpen(false)}>
-                      <Button variant="outline" className="w-full h-14 rounded-2xl glass border-white/10 font-black uppercase tracking-widest hover:border-primary/30 transition-all" size="lg">Sign In</Button>
+                      <Button variant="outline" className="w-full h-14 rounded-2xl glass border-white/10 font-black uppercase tracking-widest hover:border-primary/30 transition-all text-[11px]" size="lg">Sign In</Button>
                     </Link>
                     <Link href="/sign-up" onClick={() => setIsMobileMenuOpen(false)}>
-                      <Button className="w-full h-14 rounded-2xl font-black uppercase tracking-widest shadow-xl bg-primary hover:bg-primary/90" size="lg">Get Started</Button>
+                      <Button className="w-full h-14 rounded-2xl font-black uppercase tracking-widest shadow-xl bg-primary hover:bg-primary/90 text-[11px]" size="lg">Get Started</Button>
                     </Link>
                   </div>
                 )}

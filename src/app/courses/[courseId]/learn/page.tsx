@@ -114,35 +114,35 @@ export default function LearnPage({ params }: { params: Promise<{ courseId: stri
 
   return (
     <div className="min-h-screen bg-black flex flex-col pt-24">
-      {/* Top Header / Nav Bar (already in layout, but we need secondary one for player) */}
-      <div className="bg-background/80 backdrop-blur-xl border-b border-white/5 py-4 px-6 flex items-center justify-between z-40 fixed top-24 left-0 right-0 h-16">
-        <div className="flex items-center gap-4 min-w-0">
-          <Link href="/dashboard" className="w-10 h-10 glass border-white/5 rounded-xl flex items-center justify-center text-muted-foreground hover:text-primary transition-all">
+      {/* Top Header / Player Controls */}
+      <div className="bg-background/80 backdrop-blur-xl border-b border-white/5 px-4 sm:px-6 flex items-center justify-between z-40 fixed top-20 sm:top-24 left-0 right-0 h-16 sm:h-20 shadow-lg">
+        <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+          <Link href="/dashboard" className="w-9 h-9 sm:w-11 sm:h-11 glass border-white/5 rounded-xl flex items-center justify-center text-muted-foreground hover:text-primary transition-all shrink-0">
             <ChevronLeft className="w-5 h-5" />
           </Link>
-          <div className="h-6 w-px bg-white/10" />
-          <Link href={`/courses/${courseId}`}>
-            <h1 className="text-sm font-black tracking-tight truncate hover:text-primary transition-colors max-w-md">
+          <div className="h-6 w-px bg-white/10 hidden xs:block" />
+          <Link href={`/courses/${courseId}`} className="min-w-0">
+            <h1 className="text-xs sm:text-sm font-black tracking-tight truncate hover:text-primary transition-colors max-w-[120px] xs:max-w-xs sm:max-w-md">
               {course.title}
             </h1>
           </Link>
         </div>
 
-        <div className="flex items-center gap-4">
-          <div className="hidden lg:flex flex-col items-end mr-2">
+        <div className="flex items-center gap-2 sm:gap-4">
+          <div className="hidden md:flex flex-col items-end mr-2">
             <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-50 mb-1">Your Progress</p>
             <div className="flex items-center gap-3">
-              <div className="w-32 h-1.5 bg-white/5 rounded-full overflow-hidden">
+              <div className="w-24 lg:w-32 h-1.5 bg-white/5 rounded-full overflow-hidden">
                 <div className="h-full bg-primary shadow-[0_0_10px_rgba(124,58,237,0.4)]" style={{ width: `${course.progress}%` }} />
               </div>
               <span className="text-[10px] font-black text-primary">{course.progress}%</span>
             </div>
           </div>
-          <Button variant="ghost" size="icon" className="h-10 w-10 glass border-white/5 rounded-xl text-muted-foreground hover:text-primary">
+          <Button variant="ghost" size="icon" className="h-9 w-9 sm:h-11 sm:h-11 glass border-white/5 rounded-xl text-muted-foreground hover:text-primary hidden sm:flex">
             <Share2 className="w-4 h-4" />
           </Button>
           <Link href={`/courses/${courseId}/certificate`}>
-            <Button variant="ghost" size="icon" className="h-10 w-10 glass border-white/5 rounded-xl text-muted-foreground hover:text-primary">
+            <Button variant="ghost" size="icon" className="h-9 w-9 sm:h-11 sm:h-11 glass border-white/5 rounded-xl text-muted-foreground hover:text-primary">
               <Award className="w-4 h-4" />
             </Button>
           </Link>
@@ -150,7 +150,7 @@ export default function LearnPage({ params }: { params: Promise<{ courseId: stri
             variant="ghost"
             size="icon"
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className={`h-10 w-10 glass border-white/5 rounded-xl transition-all ${sidebarOpen ? 'text-primary' : 'text-muted-foreground'}`}
+            className={`h-9 w-9 sm:h-11 sm:h-11 glass border-white/5 rounded-xl transition-all ${sidebarOpen ? 'text-primary' : 'text-muted-foreground'}`}
           >
             {sidebarOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </Button>
@@ -405,7 +405,7 @@ export default function LearnPage({ params }: { params: Promise<{ courseId: stri
 
         {/* Sidebar / Curriculum */}
         <div
-          className={`fixed top-40 right-0 bottom-0 glass border-l border-white/10 z-30 transition-all duration-500 overflow-hidden transform ${sidebarOpen ? 'w-full lg:w-96 translate-x-0' : 'w-0 translate-x-full'
+          className={`fixed top-36 sm:top-44 right-0 bottom-0 glass border-l border-white/10 z-30 transition-all duration-500 overflow-hidden transform ${sidebarOpen ? 'w-full lg:w-96 translate-x-0 shadow-[-20px_0_60px_rgba(0,0,0,0.5)]' : 'w-0 translate-x-full'
             }`}
         >
           <div className="h-full flex flex-col w-full lg:w-96">

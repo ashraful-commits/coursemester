@@ -67,6 +67,27 @@
     /* Subtle noise texture overlay for premium feel */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
     background-repeat: repeat;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Fix for very small screens */
+  @media (max-width: 400px) {
+    h1 {
+      font-size: clamp(2.5rem, 10vw, 3.5rem) !important;
+      line-height: 1.1 !important;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 8vw, 2.5rem) !important;
+    }
+  }
+
+  /* Utility for hidden on very small screens but visible on small/med */
+  @media (max-width: 480px) {
+    .hidden-xs {
+      display: none !important;
+    }
   }
 
   ::selection {

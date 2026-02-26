@@ -207,32 +207,32 @@ export default function Home() {
 
                 {/* Floating Elements with Responsive Positioning to avoid overflow */}
                 {/* Floating Card 1 - Top Left */}
-                <div className="absolute top-0 left-0 glass-card p-6 rounded-[2rem] w-60 -translate-x-8 -translate-y-10 lg:-translate-x-24 lg:-translate-y-16 z-30 animate-float shadow-2xl border-white/10">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center text-green-500">
-                      <Zap className="w-5 h-5 fill-current" />
+                <div className="absolute top-0 left-0 glass-card p-4 sm:p-6 rounded-[1.5rem] sm:rounded-[2rem] w-48 sm:w-60 -translate-x-4 -translate-y-8 lg:-translate-x-24 lg:-translate-y-16 z-30 animate-float shadow-2xl border-white/10 hidden xs:block">
+                  <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-500/20 rounded-lg sm:rounded-xl flex items-center justify-center text-green-500">
+                      <Zap className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
                     </div>
                     <div>
-                      <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Rate</p>
-                      <p className="text-base font-black text-foreground">5.2 GB/s</p>
+                      <p className="text-[8px] sm:text-[9px] font-black uppercase text-muted-foreground tracking-widest">Rate</p>
+                      <p className="text-sm sm:text-base font-black text-foreground">5.2 GB/s</p>
                     </div>
                   </div>
-                  <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                  <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
                     <div className="h-full bg-green-500 w-[85%]" />
                   </div>
                 </div>
 
                 {/* Floating Card 2 - Bottom Right */}
-                <div className="absolute bottom-0 right-0 glass-card p-5 rounded-[2rem] w-52 translate-x-8 translate-y-10 lg:translate-x-20 lg:translate-y-16 z-30 animate-float delay-500 shadow-2xl border-white/10">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center text-blue-500">
-                      <Users className="w-4 h-4" />
+                <div className="absolute bottom-0 right-0 glass-card p-4 sm:p-5 rounded-[1.5rem] sm:rounded-[2rem] w-40 sm:w-52 translate-x-4 translate-y-8 lg:translate-x-20 lg:translate-y-16 z-30 animate-float delay-500 shadow-2xl border-white/10 hidden xs:block">
+                  <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-blue-500/20 rounded-lg flex items-center justify-center text-blue-500">
+                      <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </div>
-                    <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Network</p>
+                    <p className="text-[8px] sm:text-[9px] font-black uppercase text-muted-foreground tracking-widest">Network</p>
                   </div>
                   <div className="flex -space-x-2">
                     {[1, 2, 3].map(i => (
-                      <div key={i} className="w-8 h-8 rounded-full border-2 border-background overflow-hidden relative shadow-md">
+                      <div key={i} className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-background overflow-hidden relative shadow-md">
                         <NextImage src={`https://i.pravatar.cc/100?u=${i + 20}`} alt="user" fill />
                       </div>
                     ))}
@@ -248,21 +248,21 @@ export default function Home() {
       </section>
 
       {/* Featured Courses Section */}
-      <section className="relative py-24 lg:py-40 z-10 bg-white/[0.02]">
+      <section className="relative py-16 sm:py-24 lg:py-40 z-10 bg-white/[0.02]">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-8">
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-10 sm:mb-20 gap-6 sm:gap-8">
             <div className="max-w-2xl">
-              <Badge variant="outline" className="mb-4 border-primary/30 text-primary font-black uppercase tracking-widest px-4 py-1">
+              <Badge variant="outline" className="mb-3 sm:mb-4 border-primary/30 text-primary font-black uppercase tracking-widest px-3 sm:px-4 py-1 text-[10px] sm:text-xs">
                 Curated Selection
               </Badge>
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-tight">
+              <h2 className="text-3xl xs:text-4xl md:text-6xl font-black tracking-tighter leading-tight">
                 Elite Learning <br />
                 <span className="text-gradient">Experiences</span>
               </h2>
             </div>
-            <Link href="/courses">
-              <Button variant="link" className="text-lg font-black group h-auto p-0 hover:text-primary transition-colors">
-                Browse Full Catalog <ChevronRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform" />
+            <Link href="/courses" className="w-full sm:w-auto">
+              <Button variant="link" className="text-base sm:text-lg font-black group h-auto p-0 hover:text-primary transition-colors">
+                Browse Full Catalog <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </div>
@@ -347,31 +347,35 @@ export default function Home() {
       {/* CTA Section */}
       <section className="relative py-24 lg:py-40 z-10">
         <div className="container mx-auto px-4">
-          <div className="relative glass p-16 lg:p-24 rounded-[4rem] border-primary/20 overflow-hidden text-center group">
+          <div className="relative glass p-8 sm:p-16 lg:p-24 rounded-[2.5rem] sm:rounded-[4rem] border-primary/20 overflow-hidden text-center group">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-pink-500/10 opacity-50" />
             <div className="absolute -top-32 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-[100px] animate-pulse-slow" />
             <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-violet-600/10 rounded-full blur-[100px] animate-pulse-slow" />
 
             <div className="relative z-10">
-              <Badge variant="secondary" className="mb-8 font-black uppercase tracking-[0.3em] bg-primary/20 text-primary border-none px-6 py-2">
+              <Badge variant="secondary" className="mb-6 sm:mb-8 font-black uppercase tracking-[0.2em] sm:tracking-[0.3em] bg-primary/20 text-primary border-none px-4 sm:px-6 py-1.5 sm:py-2 text-[9px] sm:text-xs">
                 Join the 1%
               </Badge>
-              <h3 className="text-4xl md:text-7xl font-black mb-8 tracking-tighter leading-[1.1]">
+              <h3 className="text-3xl xs:text-4xl md:text-7xl font-black mb-6 sm:mb-8 tracking-tighter leading-[1.1]">
                 Ready to Build <br />
                 <span className="text-gradient">Something Iconic?</span>
               </h3>
-              <p className="text-xl mb-12 text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed">
+              <p className="text-base sm:text-xl mb-8 sm:mb-12 text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed px-4">
                 Enroll today and get instant access to our entire ecosystem. The future belongs to those who build it.
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <Link href="/sign-up">
-                  <Button size="lg" className="h-20 px-12 rounded-[2rem] text-xl font-black bg-primary hover:bg-primary/90 shadow-[0_0_40px_rgba(124,58,237,0.4)] group">
-                    Start Your Journey <MoveRight className="w-6 h-6 ml-3 group-hover:translate-x-3 transition-transform" />
+                <Link href="/sign-up" className="w-full sm:w-auto">
+                  <Button size="lg" className="h-14 sm:h-20 w-full sm:w-auto px-8 sm:px-12 rounded-xl sm:rounded-[2rem] text-base sm:text-xl font-black bg-primary hover:bg-primary/90 shadow-[0_0_40px_rgba(124,58,237,0.4)] group">
+                    Start Your Journey <MoveRight className="w-5 h-5 sm:w-6 sm:h-6 ml-3 group-hover:translate-x-3 transition-transform" />
                   </Button>
                 </Link>
               </div>
-              <p className="text-sm font-bold text-muted-foreground mt-10 uppercase tracking-widest opacity-60">
-                Unleash Your Potential • No Limits • Professional Grade
+              <p className="text-[9px] sm:text-sm font-bold text-muted-foreground mt-8 sm:mt-10 uppercase tracking-[0.1em] sm:tracking-widest opacity-60 flex flex-wrap justify-center gap-x-2 gap-y-1">
+                <span>Unleash Your Potential</span>
+                <span className="hidden xs:inline">•</span>
+                <span>No Limits</span>
+                <span className="hidden xs:inline">•</span>
+                <span>Professional Grade</span>
               </p>
             </div>
           </div>

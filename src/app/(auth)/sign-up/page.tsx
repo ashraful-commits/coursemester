@@ -57,68 +57,68 @@ export default function SignUp() {
         <div className="absolute bottom-[-10%] left-[-5%] w-[30%] h-[30%] bg-pink-500/10 rounded-full blur-[100px] animate-float" />
       </div>
 
-      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-16 items-center relative z-10">
+      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10 py-10 lg:py-0">
         {/* Left Side - Benefits */}
-        <div className="text-center lg:text-left space-y-12 animate-fadeInUp">
-          <div className="space-y-6">
-            <Link href="/" className="inline-flex items-center gap-3 font-black text-3xl group mb-8">
-              <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-primary text-primary-foreground group-hover:rotate-12 transition-transform shadow-[0_0_20px_rgba(124,58,237,0.5)]">
-                <Rocket className="h-7 w-7" />
+        <div className="text-center lg:text-left space-y-8 sm:space-y-12 animate-fadeInUp">
+          <div className="space-y-4 sm:space-y-6">
+            <Link href="/" className="inline-flex items-center justify-center lg:justify-start gap-3 font-black text-2xl sm:text-3xl group mb-4 sm:mb-8">
+              <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-primary text-primary-foreground group-hover:rotate-12 transition-transform shadow-[0_0_20px_rgba(124,58,237,0.5)]">
+                <Rocket className="h-6 w-6 sm:h-7 sm:w-7" />
               </div>
               <span className="text-gradient tracking-tighter">CodeMaster</span>
             </Link>
-            <h1 className="text-5xl lg:text-7xl font-black leading-[1.1] tracking-tighter">
+            <h1 className="text-4xl xs:text-5xl lg:text-7xl font-black leading-[1.1] tracking-tighter">
               Initiate Your <br />
               <span className="text-gradient">Ascension</span>
             </h1>
-            <p className="text-xl text-muted-foreground font-medium max-w-md mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-lg sm:text-xl text-muted-foreground font-medium max-w-md mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0">
               Join the elite circle of architects and master the technologies of tomorrow.
             </p>
           </div>
 
-          <div className="grid gap-4 max-w-md mx-auto lg:mx-0">
+          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-1 gap-4 max-w-md mx-auto lg:mx-0 px-2 sm:px-0">
             {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-center gap-6 p-6 glass rounded-2xl border-white/5 hover:border-primary/20 transition-all group">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                  <benefit.icon className="h-6 w-6" />
+              <div key={index} className="flex items-center gap-4 sm:gap-6 p-4 sm:p-6 glass rounded-2xl border-white/5 hover:border-primary/20 transition-all group text-left">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform shrink-0">
+                  <benefit.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
                 <div>
-                  <h4 className="font-black text-sm uppercase tracking-widest">{benefit.title}</h4>
-                  <p className="text-xs text-muted-foreground font-medium mt-1">{benefit.desc}</p>
+                  <h4 className="font-black text-[10px] sm:text-sm uppercase tracking-widest">{benefit.title}</h4>
+                  <p className="text-[10px] sm:text-xs text-muted-foreground font-medium mt-0.5 sm:mt-1">{benefit.desc}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="flex items-center gap-8 max-w-sm mx-auto lg:mx-0 pt-8 border-t border-white/5">
+          <div className="flex items-center justify-center lg:justify-start gap-6 sm:gap-8 max-w-sm mx-auto lg:mx-0 pt-8 border-t border-white/5">
             <div className="text-center">
-              <div className="text-2xl font-black text-primary">15K+</div>
-              <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mt-1">Learners</div>
+              <div className="text-xl sm:text-2xl font-black text-primary">15K+</div>
+              <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-muted-foreground mt-1">Learners</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-black text-foreground">380+</div>
-              <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mt-1">Modules</div>
+              <div className="text-xl sm:text-2xl font-black text-foreground">380+</div>
+              <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-muted-foreground mt-1">Modules</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-black text-primary">98%</div>
-              <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mt-1">Success</div>
+              <div className="text-xl sm:text-2xl font-black text-primary">98%</div>
+              <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-muted-foreground mt-1">Success</div>
             </div>
           </div>
         </div>
 
         {/* Right Side - Sign Up Form */}
         <div className="animate-fadeInUp delay-200">
-          <Card className="glass-card p-8 lg:p-12 rounded-[3rem] border-white/10 shadow-[0_0_60px_rgba(0,0,0,0.5)] relative overflow-hidden">
+          <Card className="glass-card p-6 xs:p-8 lg:p-12 rounded-[2rem] sm:rounded-[3rem] border-white/10 shadow-[0_0_60px_rgba(0,0,0,0.5)] relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
-            <CardHeader className="space-y-4 pb-10 p-0">
-              <CardTitle className="text-4xl font-black tracking-tighter">Create Account</CardTitle>
-              <CardDescription className="text-lg font-medium text-muted-foreground">
+            <CardHeader className="space-y-3 sm:space-y-4 pb-8 sm:pb-10 p-0">
+              <CardTitle className="text-3xl sm:text-4xl font-black tracking-tighter">Create Account</CardTitle>
+              <CardDescription className="text-base sm:text-lg font-medium text-muted-foreground leading-snug">
                 Enter your identity to begin your synchronization.
               </CardDescription>
             </CardHeader>
 
-            <CardContent className="space-y-8 p-0">
+            <CardContent className="space-y-6 sm:space-y-8 p-0">
               <form onSubmit={onSubmit} className="space-y-6">
                 <div className="space-y-3">
                   <Label htmlFor="name" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground ml-2">Operator Name</Label>

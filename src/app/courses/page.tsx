@@ -157,42 +157,42 @@ export default function CoursesPage() {
       </div>
 
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative pt-36 pb-28 lg:pt-52 lg:pb-36 z-10">
+      <section className="relative pt-32 pb-16 lg:pt-52 lg:pb-36 z-10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-primary/20 mb-8 animate-fadeIn">
-              <Sparkles className="w-3.5 h-3.5 text-primary" />
-              <span className="text-[10px] font-black uppercase tracking-[0.25em] text-primary">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full glass border-primary/20 mb-6 sm:mb-8 animate-fadeIn">
+              <Sparkles className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-primary" />
+              <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.2em] sm:tracking-[0.25em] text-primary">
                 384 Production-Grade Modules
               </span>
             </div>
 
-            <h1 className="text-5xl lg:text-8xl font-black mb-8 leading-[0.95] tracking-tighter animate-fadeInUp">
+            <h1 className="text-4xl xs:text-5xl lg:text-8xl font-black mb-6 sm:mb-8 leading-[0.95] tracking-tighter animate-fadeInUp">
               Master the{" "}
               <span className="text-gradient">
                 Unknown
               </span>
             </h1>
 
-            <p className="text-xl lg:text-2xl mb-16 text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed animate-fadeInUp delay-100">
+            <p className="text-lg lg:text-2xl mb-12 sm:mb-16 text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed animate-fadeInUp delay-100 px-4">
               Project-driven learning for high-performance engineers.
               Join <strong className="text-foreground font-black">15,000+</strong> elite students mastering production-grade systems.
             </p>
 
             {/* Stat Nodes */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto animate-fadeInUp delay-200">
+            <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto animate-fadeInUp delay-200">
               {platformStats.map((stat, i) => (
                 <div
                   key={i}
-                  className="glass-card group p-6 rounded-[2rem] border-white/5 hover:border-primary/20 hover:-translate-y-2 transition-all duration-500 cursor-default"
+                  className="glass-card group p-5 sm:p-6 rounded-[2rem] border-white/5 hover:border-primary/20 hover:-translate-y-2 transition-all duration-500 cursor-default"
                 >
-                  <div className={`w-12 h-12 ${stat.bg} rounded-2xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-500`}>
-                    <stat.icon className={`h-6 w-6 ${stat.color}`} />
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 ${stat.bg} rounded-2xl flex items-center justify-center mb-3 sm:mb-4 mx-auto group-hover:scale-110 transition-transform duration-500`}>
+                    <stat.icon className={`h-5 w-5 sm:h-6 sm:w-6 ${stat.color}`} />
                   </div>
-                  <div className="text-3xl font-black text-foreground mb-1 tracking-tighter tabular-nums">
+                  <div className="text-2xl sm:text-3xl font-black text-foreground mb-1 tracking-tighter tabular-nums">
                     {stat.value}
                   </div>
-                  <div className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground opacity-50">
+                  <div className="text-[8px] sm:text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground opacity-50">
                     {stat.label}
                   </div>
                 </div>
@@ -203,51 +203,53 @@ export default function CoursesPage() {
       </section>
 
       {/* ─── STICKY SEARCH BAR ────────────────────────────────────────────── */}
-      <div className="sticky top-24 z-40 py-5 glass border-y border-white/5">
+      <div className="sticky top-16 sm:top-24 z-40 py-4 sm:py-5 glass border-y border-white/5 bg-background/60 backdrop-blur-xl">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-4">
+          <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
             {/* Search */}
             <div className="relative flex-1 group">
               <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors z-10" />
               <Input
-                placeholder="Search 384 modules..."
+                placeholder="Search modules..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-14 h-14 text-base border-white/5 bg-white/5 focus:bg-white/8 focus:border-primary/40 rounded-2xl transition-all font-semibold placeholder:text-muted-foreground/40"
+                className="pl-14 h-12 sm:h-14 text-sm sm:text-base border-white/5 bg-white/5 focus:bg-white/8 focus:border-primary/40 rounded-xl sm:rounded-2xl transition-all font-semibold placeholder:text-muted-foreground/40"
               />
             </div>
 
-            {/* Domain Filter */}
-            <Select value={activeCategory} onValueChange={setActiveCategory}>
-              <SelectTrigger className="h-14 min-w-[180px] border-white/5 bg-white/5 rounded-2xl font-bold focus:ring-primary/30 focus:border-primary/40">
-                <SelectValue placeholder="All Domains" />
-              </SelectTrigger>
-              <SelectContent className="glass border-white/10 rounded-2xl shadow-2xl">
-                {categories.map((cat) => (
-                  <SelectItem key={cat.value} value={cat.value} className="font-bold rounded-xl">
-                    {cat.label} ({cat.count})
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <div className="flex flex-wrap sm:flex-nowrap gap-3">
+              {/* Domain Filter */}
+              <Select value={activeCategory} onValueChange={setActiveCategory}>
+                <SelectTrigger className="h-12 sm:h-14 flex-1 sm:min-w-[180px] border-white/5 bg-white/5 rounded-xl sm:rounded-2xl font-bold focus:ring-primary/30 focus:border-primary/40 text-xs sm:text-sm">
+                  <SelectValue placeholder="All Domains" />
+                </SelectTrigger>
+                <SelectContent className="glass border-white/10 rounded-2xl shadow-2xl">
+                  {categories.map((cat) => (
+                    <SelectItem key={cat.value} value={cat.value} className="font-bold rounded-xl text-xs sm:text-sm">
+                      {cat.label} ({cat.count})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
-            {/* Sort */}
-            <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="h-14 min-w-[160px] border-white/5 bg-white/5 rounded-2xl font-bold focus:ring-primary/30">
-                <SelectValue placeholder="Sort By" />
-              </SelectTrigger>
-              <SelectContent className="glass border-white/10 rounded-2xl shadow-2xl">
-                <SelectItem value="popular" className="font-bold rounded-xl">Most Popular</SelectItem>
-                <SelectItem value="newest" className="font-bold rounded-xl">Newest</SelectItem>
-                <SelectItem value="rating" className="font-bold rounded-xl">Highest Rated</SelectItem>
-                <SelectItem value="free" className="font-bold rounded-xl">Free First</SelectItem>
-              </SelectContent>
-            </Select>
+              {/* Sort */}
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger className="h-12 sm:h-14 flex-1 sm:min-w-[160px] border-white/5 bg-white/5 rounded-xl sm:rounded-2xl font-bold focus:ring-primary/30 text-xs sm:text-sm">
+                  <SelectValue placeholder="Sort By" />
+                </SelectTrigger>
+                <SelectContent className="glass border-white/10 rounded-2xl shadow-2xl">
+                  <SelectItem value="popular" className="font-bold rounded-xl text-xs sm:text-sm">Most Popular</SelectItem>
+                  <SelectItem value="newest" className="font-bold rounded-xl text-xs sm:text-sm">Newest</SelectItem>
+                  <SelectItem value="rating" className="font-bold rounded-xl text-xs sm:text-sm">Highest Rated</SelectItem>
+                  <SelectItem value="free" className="font-bold rounded-xl text-xs sm:text-sm">Free First</SelectItem>
+                </SelectContent>
+              </Select>
 
-            <Button className="h-14 px-8 rounded-2xl font-black uppercase tracking-widest text-[11px] bg-primary hover:bg-primary/90 shadow-[0_0_20px_hsl(var(--primary)/0.3)] transition-all shrink-0">
-              <Filter className="h-4 w-4 mr-2" />
-              Apply
-            </Button>
+              <Button className="h-12 sm:h-14 px-6 sm:px-8 rounded-xl sm:rounded-2xl font-black uppercase tracking-widest text-[9px] sm:text-[11px] bg-primary hover:bg-primary/90 shadow-[0_0_20px_hsl(var(--primary)/0.3)] transition-all shrink-0 ml-auto">
+                <Filter className="h-3.5 sm:h-4 w-3.5 sm:w-4 mr-2" />
+                Apply
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -261,8 +263,8 @@ export default function CoursesPage() {
                 key={cat.value}
                 onClick={() => setActiveCategory(cat.value)}
                 className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all duration-300 ${activeCategory === cat.value
-                    ? "bg-primary text-primary-foreground shadow-[0_0_20px_hsl(var(--primary)/0.3)]"
-                    : "glass border-white/5 text-muted-foreground hover:text-foreground hover:border-primary/20"
+                  ? "bg-primary text-primary-foreground shadow-[0_0_20px_hsl(var(--primary)/0.3)]"
+                  : "glass border-white/5 text-muted-foreground hover:text-foreground hover:border-primary/20"
                   }`}
               >
                 <cat.icon className="w-3.5 h-3.5" />
@@ -295,8 +297,8 @@ export default function CoursesPage() {
                   variant="ghost"
                   size="sm"
                   className={`rounded-xl font-black uppercase tracking-widest text-[9px] px-4 h-9 transition-all ${tab === "Popular"
-                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                      : "hover:bg-white/10 text-muted-foreground"
+                    ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                    : "hover:bg-white/10 text-muted-foreground"
                     }`}
                 >
                   {tab}

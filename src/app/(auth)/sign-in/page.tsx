@@ -63,49 +63,49 @@ export default function SignIn() {
         <div className="absolute bottom-[-10%] left-[-5%] w-[30%] h-[30%] bg-violet-600/10 rounded-full blur-[100px] animate-float" />
       </div>
 
-      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-16 items-center relative z-10">
+      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10 py-10 lg:py-0">
         {/* Left Side - Marketing */}
-        <div className="text-center lg:text-left space-y-12 animate-fadeInUp">
-          <div className="space-y-6">
-            <Link href="/" className="inline-flex items-center gap-3 font-black text-3xl group mb-8">
-              <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-primary text-primary-foreground group-hover:rotate-12 transition-transform shadow-[0_0_20px_rgba(124,58,237,0.5)]">
-                <BookOpen className="h-7 w-7" />
+        <div className="text-center lg:text-left space-y-8 sm:space-y-12 animate-fadeInUp px-4 sm:px-0">
+          <div className="space-y-4 sm:space-y-6">
+            <Link href="/" className="inline-flex items-center justify-center lg:justify-start gap-3 font-black text-2xl sm:text-3xl group mb-4 sm:mb-8">
+              <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-primary text-primary-foreground group-hover:rotate-12 transition-transform shadow-[0_0_20px_rgba(124,58,237,0.5)]">
+                <BookOpen className="h-6 w-6 sm:h-7 sm:w-7" />
               </div>
               <span className="text-gradient tracking-tighter">CodeMaster</span>
             </Link>
-            <h1 className="text-5xl lg:text-7xl font-black leading-[1.1] tracking-tighter">
+            <h1 className="text-4xl xs:text-5xl lg:text-7xl font-black leading-[1.1] tracking-tighter">
               Access the <br />
               <span className="text-gradient">Control Center</span>
             </h1>
-            <p className="text-xl text-muted-foreground font-medium max-w-md mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-lg sm:text-xl text-muted-foreground font-medium max-w-md mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0">
               Resume your elite training and continue building the future of technology.
             </p>
           </div>
 
-          <div className="grid grid-cols-3 gap-8 max-w-sm mx-auto lg:mx-0 py-8 px-10 glass rounded-[2.5rem] border-white/5">
+          <div className="grid grid-cols-3 gap-2 sm:gap-8 max-w-sm mx-auto lg:mx-0 py-6 sm:py-8 px-4 sm:px-10 glass rounded-[2rem] sm:rounded-[2.5rem] border-white/5">
             <div className="text-center">
-              <div className="text-2xl font-black text-primary">15K+</div>
-              <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mt-1">Learners</div>
+              <div className="text-xl sm:text-2xl font-black text-primary">15K+</div>
+              <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-muted-foreground mt-1">Learners</div>
             </div>
             <div className="text-center border-x border-white/10">
-              <div className="text-2xl font-black text-foreground">380+</div>
-              <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mt-1">Modules</div>
+              <div className="text-xl sm:text-2xl font-black text-foreground">380+</div>
+              <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-muted-foreground mt-1">Modules</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-black text-primary">98%</div>
-              <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mt-1">Success</div>
+              <div className="text-xl sm:text-2xl font-black text-primary">98%</div>
+              <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-muted-foreground mt-1">Success</div>
             </div>
           </div>
         </div>
 
         {/* Right Side - Sign In Form */}
         <div className="animate-fadeInUp delay-200">
-          <Card className="glass-card p-8 lg:p-12 rounded-[3rem] border-white/10 shadow-[0_0_60px_rgba(0,0,0,0.5)] relative overflow-hidden">
+          <Card className="glass-card p-6 xs:p-8 lg:p-12 rounded-[2rem] sm:rounded-[3rem] border-white/10 shadow-[0_0_60px_rgba(0,0,0,0.5)] relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
-            <CardHeader className="space-y-4 pb-12 p-0">
-              <CardTitle className="text-4xl font-black tracking-tighter">Sign In</CardTitle>
-              <CardDescription className="text-lg font-medium text-muted-foreground">
+            <CardHeader className="space-y-3 sm:space-y-4 pb-8 sm:pb-12 p-0">
+              <CardTitle className="text-3xl sm:text-4xl font-black tracking-tighter">Sign In</CardTitle>
+              <CardDescription className="text-base sm:text-lg font-medium text-muted-foreground leading-snug">
                 Enter your secure credentials to bypass the gates.
               </CardDescription>
             </CardHeader>

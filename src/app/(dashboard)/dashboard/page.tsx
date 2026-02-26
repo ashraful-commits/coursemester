@@ -107,9 +107,9 @@ export default function MyLearningPage() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-14 relative z-10">
+      <div className="container mx-auto px-4 py-8 sm:py-14 relative z-10">
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
+        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-10 sm:mb-16">
           {learningStats.map((stat, i) => (
             <div
               key={i}

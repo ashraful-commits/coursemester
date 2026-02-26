@@ -87,29 +87,29 @@ export default function CartPage() {
                 <div className="absolute bottom-0 left-0 w-[30%] h-[40%] bg-violet-500/5 rounded-full blur-[100px] animate-float" />
             </div>
 
-            <div className="relative z-10 pt-32 pb-12 border-b border-white/5 bg-white/[0.01] backdrop-blur-xl">
+            <div className="relative z-10 pt-28 pb-10 sm:pt-32 sm:pb-12 border-b border-white/5 bg-white/[0.01] backdrop-blur-xl">
                 <div className="container mx-auto px-4">
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-5">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-5">
                         <ShoppingCart className="w-3 h-3 text-primary" />
                         <span className="text-[9px] font-black uppercase tracking-[0.25em] text-primary">Order Queue</span>
                     </div>
-                    <h1 className="text-5xl md:text-6xl font-black tracking-tighter leading-none mb-3">
+                    <h1 className="text-4xl xs:text-5xl md:text-6xl font-black tracking-tighter leading-none mb-3">
                         Your <span className="text-gradient">Cart</span>
                     </h1>
-                    <p className="text-muted-foreground font-medium">
+                    <p className="text-sm sm:text-base text-muted-foreground font-medium">
                         {cartItems.length} course{cartItems.length !== 1 ? "s" : ""} ready for checkout
                     </p>
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 py-14 relative z-10">
+            <div className="container mx-auto px-4 py-8 sm:py-14 relative z-10">
                 {cartItems.length === 0 ? (
-                    <div className="glass-card rounded-[4rem] border-white/5 p-24 text-center max-w-2xl mx-auto animate-fadeInUp">
-                        <div className="w-24 h-24 bg-primary/10 rounded-[2.5rem] flex items-center justify-center mx-auto mb-8">
-                            <ShoppingCart className="w-12 h-12 text-primary/40" />
+                    <div className="glass-card rounded-[2.5rem] sm:rounded-[4rem] border-white/5 p-12 sm:p-24 text-center max-w-2xl mx-auto animate-fadeInUp">
+                        <div className="w-16 h-16 sm:w-24 sm:h-24 bg-primary/10 rounded-[1.5rem] sm:rounded-[2.5rem] flex items-center justify-center mx-auto mb-6 sm:mb-8">
+                            <ShoppingCart className="w-8 h-8 sm:w-12 sm:h-12 text-primary/40" />
                         </div>
-                        <h2 className="text-3xl font-black tracking-tighter mb-4">Your Cart is Empty</h2>
-                        <p className="text-muted-foreground font-medium mb-10">
+                        <h2 className="text-2xl sm:text-3xl font-black tracking-tighter mb-4">Your Cart is Empty</h2>
+                        <p className="text-sm sm:text-base text-muted-foreground font-medium mb-8 sm:mb-10">
                             Add courses you want to start learning today.
                         </p>
                         <Link href="/courses">
@@ -120,34 +120,34 @@ export default function CartPage() {
                         </Link>
                     </div>
                 ) : (
-                    <div className="grid lg:grid-cols-3 gap-10 items-start">
+                    <div className="grid lg:grid-cols-3 gap-8 lg:gap-10 items-start">
                         {/* Cart Items */}
-                        <div className="lg:col-span-2 space-y-5">
+                        <div className="lg:col-span-2 space-y-4 sm:space-y-5">
                             {cartItems.map((item, i) => (
                                 <div
                                     key={item.id}
                                     className="glass-card group rounded-3xl border-white/5 hover:border-primary/15 overflow-hidden transition-all duration-500 hover:-translate-y-0.5 animate-fadeInUp"
                                     style={{ animationDelay: `${i * 80}ms` }}
                                 >
-                                    <div className="flex gap-6 p-6">
-                                        <Link href={`/courses/${item.id}`} className="relative w-36 h-24 rounded-2xl overflow-hidden shrink-0">
+                                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 p-4 sm:p-6">
+                                        <Link href={`/courses/${item.id}`} className="relative w-full sm:w-36 h-44 sm:h-24 rounded-2xl overflow-hidden shrink-0">
                                             <NextImage src={item.imageUrl} alt={item.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                                         </Link>
                                         <div className="flex-1 min-w-0">
-                                            <div className="flex items-start justify-between gap-3">
+                                            <div className="flex flex-col xs:flex-row items-start justify-between gap-4">
                                                 <div className="flex-1 min-w-0">
                                                     <Badge className="glass border-white/10 text-[8px] font-black uppercase tracking-widest mb-2">
                                                         {item.category}
                                                     </Badge>
                                                     <Link href={`/courses/${item.id}`}>
-                                                        <h3 className="text-lg font-black tracking-tight group-hover:text-primary transition-colors line-clamp-2 mb-1">
+                                                        <h3 className="text-base sm:text-lg font-black tracking-tight group-hover:text-primary transition-colors line-clamp-2 mb-1">
                                                             {item.title}
                                                         </h3>
                                                     </Link>
-                                                    <p className="text-[11px] font-black uppercase tracking-widest text-muted-foreground opacity-50 mb-3">
+                                                    <p className="text-[10px] sm:text-[11px] font-black uppercase tracking-widest text-muted-foreground opacity-50 mb-3">
                                                         by {item.instructor.name}
                                                     </p>
-                                                    <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-wider text-muted-foreground opacity-50">
+                                                    <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-muted-foreground opacity-50">
                                                         <div className="flex items-center gap-1">
                                                             <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
                                                             <span className="text-amber-400">{item.rating}</span>
@@ -160,12 +160,14 @@ export default function CartPage() {
                                                         <span>{item.level}</span>
                                                     </div>
                                                 </div>
-                                                <div className="text-right shrink-0">
-                                                    <div className="text-2xl font-black tracking-tighter">${item.price}</div>
-                                                    <div className="text-xs line-through text-muted-foreground opacity-40">${item.originalPrice}</div>
+                                                <div className="flex xs:flex-col items-center xs:items-end justify-between w-full xs:w-auto shrink-0 border-t xs:border-none border-white/5 pt-4 xs:pt-0">
+                                                    <div className="text-right">
+                                                        <div className="text-xl sm:text-2xl font-black tracking-tighter">${item.price}</div>
+                                                        <div className="text-[10px] sm:text-xs line-through text-muted-foreground opacity-40">${item.originalPrice}</div>
+                                                    </div>
                                                     <button
                                                         onClick={() => removeItem(item.id)}
-                                                        className="mt-3 flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-muted-foreground hover:text-red-400 transition-colors"
+                                                        className="xs:mt-3 flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-muted-foreground hover:text-red-400 transition-colors bg-white/5 sm:bg-transparent px-3 py-1.5 rounded-lg xs:p-0"
                                                     >
                                                         <Trash2 className="w-3 h-3" />
                                                         Remove
@@ -178,8 +180,8 @@ export default function CartPage() {
                             ))}
 
                             {/* Coupon Section */}
-                            <div className="glass-card rounded-3xl border-white/5 p-8 animate-fadeInUp delay-300">
-                                <h3 className="text-lg font-black tracking-tight mb-5 flex items-center gap-2">
+                            <div className="glass-card rounded-3xl border-white/5 p-6 sm:p-8 animate-fadeInUp delay-300">
+                                <h3 className="text-base sm:text-lg font-black tracking-tight mb-4 sm:mb-5 flex items-center gap-2">
                                     <Tag className="w-5 h-5 text-primary" /> Apply Coupon
                                 </h3>
                                 {appliedCoupon ? (
@@ -199,9 +201,9 @@ export default function CartPage() {
                                     </div>
                                 ) : (
                                     <div className="space-y-3">
-                                        <div className="flex gap-3">
+                                        <div className="flex flex-col xs:flex-row gap-3">
                                             <Input
-                                                placeholder="Enter coupon code (e.g. ELITE50)"
+                                                placeholder="Enter coupon code"
                                                 value={couponCode}
                                                 onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
                                                 onKeyDown={(e) => e.key === "Enter" && applyCoupon()}
