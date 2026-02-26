@@ -1,425 +1,467 @@
 "use client"
 
-import React from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import React, { useState } from "react"
+import { CourseCard } from "@/components/courses/course-card"
+import { CourseCardSkeleton } from "@/components/ui/skeleton"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Star, Clock, Users, Search, Heart, Filter, TrendingUp, Award, BookOpen, Play } from "lucide-react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import {
+  Search,
+  Filter,
+  TrendingUp,
+  Award,
+  BookOpen,
+  Users,
+  Zap,
+  Star,
+  ArrowRight,
+  ChevronRight,
+  Cpu,
+  Globe,
+  Layers,
+  Sparkles,
+} from "lucide-react"
 import Link from "next/link"
-import { CourseCardSkeleton } from "@/components/ui/skeleton"
+import NextImage from "next/image"
 
-// Enhanced mock courses with real data
 const mockCourses = [
   {
-    id: "react-development",
-    title: "Complete React Development Bootcamp",
-    description: "Master React from scratch and build real-world applications. This comprehensive course covers React fundamentals, hooks, state management, routing, and deployment.",
-    price: 89.99,
-    originalPrice: 199.99,
-    level: "BEGINNER",
-    category: "Web Development",
-    imageUrl: "/covers/react-bootcamp.svg",
-    rating: 4.8,
-    students: 2450,
-    duration: "42 hours",
-    lessons: 285,
-    instructor: "Sarah Johnson",
-    instructorAvatar: "/avatars/sarah.jpg",
-    badge: "Bestseller",
-    lastUpdated: "2 weeks ago"
+    id: "1",
+    title: "The Ultimate React Bootcamp 2024",
+    description: "Master React from beginner to advanced with hands-on, production-grade projects used at top tech companies.",
+    imageUrl: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800&auto=format&fit=crop",
+    price: 49.99,
+    isPublished: true,
+    category: { name: "Web Systems" },
+    instructor: { name: "John Doe", image: "https://randomuser.me/api/portraits/men/32.jpg" },
+    chapters: [{ id: "c1", lessons: [{ id: "l1", duration: 120 }, { id: "l2", duration: 150 }, { id: "l3", duration: 90 }] }],
+    reviews: [{ rating: 5 }, { rating: 4.8 }, { rating: 5 }],
+    enrollments: Array(1250),
   },
   {
-    id: "python-data-science",
-    title: "Python for Data Science and Machine Learning",
-    description: "Learn Python programming and apply it to data science, machine learning, and artificial intelligence. Includes NumPy, Pandas, Matplotlib, and Scikit-learn.",
-    price: 129.99,
-    originalPrice: 249.99,
-    level: "INTERMEDIATE",
-    category: "Data Science",
-    imageUrl: "/covers/python-data-science.svg",
-    rating: 4.9,
-    students: 3120,
-    duration: "58 hours",
-    lessons: 420,
-    instructor: "Dr. Michael Chen",
-    instructorAvatar: "/avatars/michael.jpg",
-    badge: "Hot",
-    lastUpdated: "1 week ago"
+    id: "2",
+    title: "Python for Data Science and AI",
+    description: "Unlock the power of Python for advanced data analysis, machine learning models, and neural networks.",
+    imageUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop",
+    price: 79.99,
+    isPublished: true,
+    category: { name: "Intelligence" },
+    instructor: { name: "Jane Smith", image: "https://randomuser.me/api/portraits/women/44.jpg" },
+    chapters: [{ id: "c2", lessons: [{ id: "l3", duration: 180 }, { id: "l4", duration: 200 }, { id: "l5", duration: 160 }] }],
+    reviews: [{ rating: 4.9 }, { rating: 4.7 }, { rating: 5 }],
+    enrollments: Array(2500),
   },
   {
-    id: "flutter-mobile",
+    id: "3",
     title: "Flutter Mobile App Development",
-    description: "Build beautiful, native-quality iOS and Android apps using Flutter. Learn Dart programming, widgets, state management, and app deployment.",
-    price: 99.99,
-    originalPrice: 179.99,
-    level: "INTERMEDIATE",
-    category: "Mobile Development",
-    imageUrl: "/covers/flutter-mobile.svg",
-    rating: 4.7,
-    students: 890,
-    duration: "36 hours",
-    lessons: 198,
-    instructor: "Alex Kumar",
-    instructorAvatar: "/avatars/alex.jpg",
-    badge: "New",
-    lastUpdated: "3 days ago"
+    description: "Build beautiful, native-quality iOS and Android apps from a single codebase with Flutter and Dart.",
+    imageUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop",
+    price: 59.99,
+    isPublished: true,
+    category: { name: "Native Flow" },
+    instructor: { name: "Carlos Rossi", image: "https://randomuser.me/api/portraits/men/56.jpg" },
+    chapters: [{ id: "c3", lessons: [{ id: "l5", duration: 160 }, { id: "l6", duration: 180 }, { id: "l7", duration: 140 }] }],
+    reviews: [{ rating: 4.8 }, { rating: 4.6 }, { rating: 4.9 }],
+    enrollments: Array(1800),
   },
   {
-    id: "docker-kubernetes",
-    title: "Docker and Kubernetes Masterclass",
-    description: "Master containerization and orchestration with Docker and Kubernetes. Learn to build, deploy, and scale modern applications.",
-    price: 119.99,
-    originalPrice: 229.99,
-    level: "ADVANCED",
-    category: "DevOps",
-    imageUrl: "/covers/docker-kubernetes.svg",
-    rating: 4.6,
-    students: 567,
-    duration: "44 hours",
-    lessons: 312,
-    instructor: "David Park",
-    instructorAvatar: "/avatars/david.jpg",
-    badge: "Popular",
-    lastUpdated: "1 month ago"
-  }
-]
-
-// Statistics data
-const stats = [
-  { label: "Active Students", value: "15,234", icon: Users, color: "text-blue-600" },
-  { label: "Expert Instructors", value: "142", icon: Award, color: "text-green-600" },
-  { label: "Total Courses", value: "384", icon: BookOpen, color: "text-purple-600" },
-  { label: "Success Rate", value: "98%", icon: TrendingUp, color: "text-orange-600" }
-]
-
-// Testimonials
-const testimonials = [
-  {
-    name: "Emma Thompson",
-    role: "Full Stack Developer",
-    content: "The React course transformed my career. The instructor's teaching style is exceptional and the projects are industry-relevant.",
-    rating: 5,
-    avatar: "/avatars/emma.jpg"
+    id: "4",
+    title: "Docker & Kubernetes: The Complete Guide",
+    description: "Deploy and scale modern applications with containerization, orchestration, and infrastructure as code.",
+    imageUrl: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&auto=format&fit=crop",
+    price: 69.99,
+    isPublished: true,
+    category: { name: "Infrastructure" },
+    instructor: { name: "Aisha Khan", image: "https://randomuser.me/api/portraits/women/65.jpg" },
+    chapters: [{ id: "c4", lessons: [{ id: "l7", duration: 140 }, { id: "l8", duration: 190 }, { id: "l9", duration: 160 }] }],
+    reviews: [{ rating: 4.9 }, { rating: 4.8 }, { rating: 4.7 }],
+    enrollments: Array(1500),
   },
   {
-    name: "James Rodriguez",
-    role: "Data Scientist",
-    content: "Best investment in my professional development. The Python data science course gave me the skills I needed to land my dream job.",
-    rating: 5,
-    avatar: "/avatars/james.jpg"
-  }
+    id: "5",
+    title: "Node.js Backend Architecture Mastery",
+    description: "Build high-performance REST APIs and microservices with Node.js, Express, MongoDB, and Redis.",
+    imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop",
+    price: 59.99,
+    isPublished: true,
+    category: { name: "Web Systems" },
+    instructor: { name: "Marcus Wells", image: "https://randomuser.me/api/portraits/men/42.jpg" },
+    chapters: [{ id: "c5", lessons: [{ id: "l10", duration: 200 }, { id: "l11", duration: 175 }, { id: "l12", duration: 150 }] }],
+    reviews: [{ rating: 5 }, { rating: 4.8 }],
+    enrollments: Array(980),
+  },
+  {
+    id: "6",
+    title: "System Design for Senior Engineers",
+    description: "Learn how to architect distributed systems, design databases at scale, and ace system design interviews.",
+    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+    price: 0,
+    isPublished: true,
+    category: { name: "Architecture" },
+    instructor: { name: "Priya Nair", image: "https://randomuser.me/api/portraits/women/29.jpg" },
+    chapters: [{ id: "c6", lessons: [{ id: "l13", duration: 220 }, { id: "l14", duration: 190 }, { id: "l15", duration: 210 }] }],
+    reviews: [{ rating: 4.9 }, { rating: 5 }, { rating: 4.8 }],
+    enrollments: Array(3200),
+  },
+]
+
+const categories = [
+  { label: "All Domains", value: "all", icon: Globe, count: 384 },
+  { label: "Web Systems", value: "web", icon: Layers, count: 98 },
+  { label: "Intelligence", value: "data", icon: Cpu, count: 72 },
+  { label: "Native Flow", value: "mobile", icon: Zap, count: 54 },
+  { label: "Infrastructure", value: "devops", icon: TrendingUp, count: 68 },
+]
+
+const platformStats = [
+  { label: "Active Students", value: "15,234", icon: Users, color: "text-blue-400", bg: "bg-blue-400/10" },
+  { label: "Expert Instructors", value: "142", icon: Award, color: "text-amber-400", bg: "bg-amber-400/10" },
+  { label: "Elite Modules", value: "384", icon: BookOpen, color: "text-violet-400", bg: "bg-violet-400/10" },
+  { label: "Success Rate", value: "98%", icon: TrendingUp, color: "text-emerald-400", bg: "bg-emerald-400/10" },
 ]
 
 export default function CoursesPage() {
-  // Simulate loading state
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [activeCategory, setActiveCategory] = useState("all")
+  const [sortBy, setSortBy] = useState("popular")
+  const [searchQuery, setSearchQuery] = useState("")
 
-  // Demo function to toggle loading state
-  const toggleLoading = () => {
+  const handleLoadMore = () => {
     setIsLoading(true)
-    setTimeout(() => setIsLoading(false), 2000)
+    setTimeout(() => setIsLoading(false), 1800)
   }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
-        <div className="relative container mx-auto px-4 py-20 lg:py-28">
+    <div className="min-h-screen bg-background overflow-x-hidden relative">
+      {/* Fixed Background Ambience */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 right-[-5%] w-[55%] h-[60%] bg-primary/8 rounded-full blur-[140px] animate-pulse-slow" />
+        <div className="absolute bottom-[10%] left-[-10%] w-[40%] h-[50%] bg-violet-700/5 rounded-full blur-[120px] animate-float-slow" />
+        <div className="absolute top-[40%] left-[30%] w-[30%] h-[30%] bg-pink-500/3 rounded-full blur-[100px]" />
+        {/* Subtle grid */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(to right, hsl(var(--primary)) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px",
+          }}
+        />
+      </div>
+
+      {/* ─── HERO ─────────────────────────────────────────────────────────── */}
+      <section className="relative pt-36 pb-28 lg:pt-52 lg:pb-36 z-10">
+        <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-yellow-500 text-yellow-900 hover:bg-yellow-400">
-              🎓 Limited Time: 30% OFF All Courses
-            </Badge>
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-              Master New Skills with
-              <span className="text-yellow-400"> Premium Courses</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-primary/20 mb-8 animate-fadeIn">
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
+              <span className="text-[10px] font-black uppercase tracking-[0.25em] text-primary">
+                384 Production-Grade Modules
+              </span>
+            </div>
+
+            <h1 className="text-5xl lg:text-8xl font-black mb-8 leading-[0.95] tracking-tighter animate-fadeInUp">
+              Master the{" "}
+              <span className="text-gradient">
+                Unknown
+              </span>
             </h1>
-            <p className="text-xl lg:text-2xl mb-8 text-gray-100 leading-relaxed">
-              Join 15,000+ students learning from industry experts. 
-              Transform your career with hands-on, project-based learning.
+
+            <p className="text-xl lg:text-2xl mb-16 text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed animate-fadeInUp delay-100">
+              Project-driven learning for high-performance engineers.
+              Join <strong className="text-foreground font-black">15,000+</strong> elite students mastering production-grade systems.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/sign-in">
-                <Button size="lg" className="bg-yellow-500 hover:bg-yellow-400 text-gray-900 px-8 py-4 text-lg font-semibold">
-                  Start Learning Today
-                </Button>
-              </Link>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 text-lg font-semibold">
-                Browse Free Courses
-              </Button>
+
+            {/* Stat Nodes */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto animate-fadeInUp delay-200">
+              {platformStats.map((stat, i) => (
+                <div
+                  key={i}
+                  className="glass-card group p-6 rounded-[2rem] border-white/5 hover:border-primary/20 hover:-translate-y-2 transition-all duration-500 cursor-default"
+                >
+                  <div className={`w-12 h-12 ${stat.bg} rounded-2xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-500`}>
+                    <stat.icon className={`h-6 w-6 ${stat.color}`} />
+                  </div>
+                  <div className="text-3xl font-black text-foreground mb-1 tracking-tighter tabular-nums">
+                    {stat.value}
+                  </div>
+                  <div className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground opacity-50">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-gray-50 to-transparent"></div>
       </section>
 
-      {/* Statistics Section */}
-      <section className="py-12 bg-white shadow-sm">
+      {/* ─── STICKY SEARCH BAR ────────────────────────────────────────────── */}
+      <div className="sticky top-24 z-40 py-5 glass border-y border-white/5">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <stat.icon className={`h-8 w-8 mx-auto mb-2 ${stat.color}`} />
-                <div className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
-              </div>
+          <div className="flex flex-col lg:flex-row gap-4">
+            {/* Search */}
+            <div className="relative flex-1 group">
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors z-10" />
+              <Input
+                placeholder="Search 384 modules..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-14 h-14 text-base border-white/5 bg-white/5 focus:bg-white/8 focus:border-primary/40 rounded-2xl transition-all font-semibold placeholder:text-muted-foreground/40"
+              />
+            </div>
+
+            {/* Domain Filter */}
+            <Select value={activeCategory} onValueChange={setActiveCategory}>
+              <SelectTrigger className="h-14 min-w-[180px] border-white/5 bg-white/5 rounded-2xl font-bold focus:ring-primary/30 focus:border-primary/40">
+                <SelectValue placeholder="All Domains" />
+              </SelectTrigger>
+              <SelectContent className="glass border-white/10 rounded-2xl shadow-2xl">
+                {categories.map((cat) => (
+                  <SelectItem key={cat.value} value={cat.value} className="font-bold rounded-xl">
+                    {cat.label} ({cat.count})
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {/* Sort */}
+            <Select value={sortBy} onValueChange={setSortBy}>
+              <SelectTrigger className="h-14 min-w-[160px] border-white/5 bg-white/5 rounded-2xl font-bold focus:ring-primary/30">
+                <SelectValue placeholder="Sort By" />
+              </SelectTrigger>
+              <SelectContent className="glass border-white/10 rounded-2xl shadow-2xl">
+                <SelectItem value="popular" className="font-bold rounded-xl">Most Popular</SelectItem>
+                <SelectItem value="newest" className="font-bold rounded-xl">Newest</SelectItem>
+                <SelectItem value="rating" className="font-bold rounded-xl">Highest Rated</SelectItem>
+                <SelectItem value="free" className="font-bold rounded-xl">Free First</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Button className="h-14 px-8 rounded-2xl font-black uppercase tracking-widest text-[11px] bg-primary hover:bg-primary/90 shadow-[0_0_20px_hsl(var(--primary)/0.3)] transition-all shrink-0">
+              <Filter className="h-4 w-4 mr-2" />
+              Apply
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* ─── CATEGORY PILLS ───────────────────────────────────────────────── */}
+      <div className="relative z-10 py-8">
+        <div className="container mx-auto px-4">
+          <div className="flex gap-3 flex-wrap">
+            {categories.map((cat) => (
+              <button
+                key={cat.value}
+                onClick={() => setActiveCategory(cat.value)}
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all duration-300 ${activeCategory === cat.value
+                    ? "bg-primary text-primary-foreground shadow-[0_0_20px_hsl(var(--primary)/0.3)]"
+                    : "glass border-white/5 text-muted-foreground hover:text-foreground hover:border-primary/20"
+                  }`}
+              >
+                <cat.icon className="w-3.5 h-3.5" />
+                {cat.label}
+                <span className={`text-[9px] ${activeCategory === cat.value ? "opacity-70" : "opacity-40"}`}>
+                  {cat.count}
+                </span>
+              </button>
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Search and Filters Section */}
-      <section className="py-8">
+      {/* ─── COURSE GRID ──────────────────────────────────────────────────── */}
+      <section className="py-12 relative z-10">
         <div className="container mx-auto px-4">
-          <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8">
-            <div className="grid lg:grid-cols-12 gap-4 items-end">
-              <div className="lg:col-span-5">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Search Courses</label>
-                <div className="relative">
-                  <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                  <Input 
-                    placeholder="What do you want to learn?" 
-                    className="pl-10 h-12 text-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-              <div className="lg:col-span-3">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
-                <Select>
-                  <SelectTrigger className="h-12 border-gray-200 focus:border-blue-500">
-                    <SelectValue placeholder="All Categories" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Categories</SelectItem>
-                    <SelectItem value="web">Web Development</SelectItem>
-                    <SelectItem value="data">Data Science</SelectItem>
-                    <SelectItem value="mobile">Mobile Development</SelectItem>
-                    <SelectItem value="devops">DevOps</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="lg:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Level</label>
-                <Select>
-                  <SelectTrigger className="h-12 border-gray-200 focus:border-blue-500">
-                    <SelectValue placeholder="All Levels" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Levels</SelectItem>
-                    <SelectItem value="beginner">Beginner</SelectItem>
-                    <SelectItem value="intermediate">Intermediate</SelectItem>
-                    <SelectItem value="advanced">Advanced</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="lg:col-span-2">
-                <Button className="w-full h-12 bg-blue-600 hover:bg-blue-700">
-                  <Filter className="h-4 w-4 mr-2" />
-                  Apply Filters
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-2">
+                Active <span className="text-gradient">Deployments</span>
+              </h2>
+              <p className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground opacity-50">
+                {mockCourses.length} modules synced • Updated daily
+              </p>
+            </div>
+            <div className="flex gap-2 p-1.5 glass rounded-2xl border-white/5">
+              {["Popular", "Trending", "New"].map((tab) => (
+                <Button
+                  key={tab}
+                  variant="ghost"
+                  size="sm"
+                  className={`rounded-xl font-black uppercase tracking-widest text-[9px] px-4 h-9 transition-all ${tab === "Popular"
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                      : "hover:bg-white/10 text-muted-foreground"
+                    }`}
+                >
+                  {tab}
                 </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Course Grid */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900">Popular Courses</h2>
-            <div className="flex gap-2">
-              <Button variant="outline" size="sm">Most Popular</Button>
-              <Button variant="ghost" size="sm">Highest Rated</Button>
-              <Button variant="ghost" size="sm">Newest</Button>
+              ))}
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
-            {isLoading ? (
-              // Show skeleton cards while loading
-              Array.from({ length: 4 }).map((_, index) => (
-                <CourseCardSkeleton key={index} />
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+            {isLoading
+              ? Array.from({ length: 6 }).map((_, i) => (
+                <CourseCardSkeleton key={i} />
               ))
-            ) : (
-              // Show actual course cards
-              mockCourses.map((course) => (
-                <Card key={course.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-0 shadow-lg">
-                {/* Course Image */}
-                <div className="relative h-48 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
-                  {course.imageUrl ? (
-                    <div className="w-full h-full flex items-center justify-center text-6xl font-bold text-gray-400">
-                      {course.title.charAt(0)}
-                    </div>
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <BookOpen className="h-12 w-12 text-gray-400" />
-                    </div>
-                  )}
-                  
-                  {/* Badge */}
-                  <Badge className={`absolute top-3 left-3 ${
-                    course.badge === 'Bestseller' ? 'bg-yellow-500 hover:bg-yellow-400' :
-                    course.badge === 'Hot' ? 'bg-red-500 hover:bg-red-400' :
-                    course.badge === 'New' ? 'bg-green-500 hover:bg-green-400' :
-                    'bg-purple-500 hover:bg-purple-400'
-                  }`}>
-                    {course.badge}
-                  </Badge>
-
-                  {/* Wishlist Button */}
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="absolute top-3 right-3 bg-white/90 hover:bg-white p-2 h-8 w-8"
-                  >
-                    <Heart className="h-4 w-4" />
-                  </Button>
-
-                  {/* Play Button Overlay */}
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <Button className="bg-white hover:bg-gray-100 text-gray-900 rounded-full h-12 w-12 p-0">
-                      <Play className="h-5 w-5 ml-1" />
-                    </Button>
-                  </div>
+              : mockCourses.map((course, i) => (
+                <div
+                  key={course.id}
+                  className="animate-fadeInUp"
+                  style={{ animationDelay: `${i * 80}ms` }}
+                >
+                  <CourseCard course={course} />
                 </div>
-
-                <CardContent className="p-5">
-                  {/* Category and Level */}
-                  <div className="flex justify-between items-center mb-3">
-                    <Badge variant="secondary" className="text-xs">
-                      {course.category}
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      {course.level}
-                    </Badge>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="font-bold text-lg mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                    {course.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                    {course.description}
-                  </p>
-
-                  {/* Rating and Students */}
-                  <div className="flex items-center justify-between mb-3 text-sm">
-                    <div className="flex items-center gap-1">
-                      <div className="flex items-center">
-                        {[...Array(5)].map((_, i) => (
-                          <Star 
-                            key={i} 
-                            className={`h-4 w-4 ${
-                              i < Math.floor(course.rating) 
-                                ? 'fill-yellow-400 text-yellow-400' 
-                                : 'text-gray-300'
-                            }`} 
-                          />
-                        ))}
-                      </div>
-                      <span className="font-medium">{course.rating}</span>
-                      <span className="text-gray-500">({course.students.toLocaleString()})</span>
-                    </div>
-                  </div>
-
-                  {/* Instructor */}
-                  <div className="flex items-center gap-2 mb-4">
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage src={course.instructorAvatar} />
-                      <AvatarFallback>{course.instructor.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="text-sm font-medium">{course.instructor}</p>
-                      <p className="text-xs text-gray-500">{course.lastUpdated}</p>
-                    </div>
-                  </div>
-
-                  {/* Duration and Lessons */}
-                  <div className="flex items-center gap-4 mb-4 text-sm text-gray-600">
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-4 w-4" />
-                      <span>{course.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <BookOpen className="h-4 w-4" />
-                      <span>{course.lessons} lessons</span>
-                    </div>
-                  </div>
-
-                  {/* Price and CTA */}
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="text-2xl font-bold text-gray-900">${course.price}</div>
-                      <div className="text-sm text-gray-500 line-through">${course.originalPrice}</div>
-                    </div>
-                    <Link href={`/courses/${course.id}`}>
-                      <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-                        View Course
-                      </Button>
-                    </Link>
-                  </div>
-</CardContent>
-                </Card>
-              ))
-            )}
+              ))}
           </div>
 
           {/* Load More */}
-          <div className="text-center mt-12 space-y-4">
-            <div className="flex gap-4 justify-center">
-              <Button variant="outline" size="lg" className="px-8">
-                Load More Courses
-              </Button>
-              <Button 
-                variant="secondary" 
-                size="lg" 
-                onClick={toggleLoading}
-                className="px-8"
-              >
-                Demo Loading State
-              </Button>
-            </div>
-            <p className="text-sm text-gray-600">
-              Click "Demo Loading State" to see skeleton loading animations
+          <div className="text-center mt-24 space-y-5">
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={handleLoadMore}
+              disabled={isLoading}
+              className="glass border-white/10 hover:border-primary/30 hover:bg-primary/5 h-16 px-12 rounded-2xl font-black uppercase tracking-widest text-[11px] group shadow-2xl transition-all"
+            >
+              {isLoading ? (
+                <span className="flex items-center gap-3">
+                  <span className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                  Syncing Nodes...
+                </span>
+              ) : (
+                <span className="flex items-center gap-3">
+                  Expand Horizon
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+              )}
+            </Button>
+            <p className="text-[9px] font-black uppercase tracking-[0.3em] text-muted-foreground opacity-40">
+              Showing {mockCourses.length} of 384 modules
             </p>
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">What Our Students Say</h2>
-            <p className="text-xl text-gray-600">Join thousands of satisfied learners</p>
-          </div>
+      {/* ─── SOCIAL PROOF MARQUEE ─────────────────────────────────────────── */}
+      <section className="relative z-10 py-20 overflow-hidden border-t border-white/5">
+        <div className="container mx-auto px-4 text-center mb-12">
+          <Badge className="glass border-white/10 font-black uppercase tracking-[0.25em] text-[9px] px-4 py-2 mb-6">
+            Trusted by elite engineers
+          </Badge>
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4">
+            The <span className="text-gradient">Operator</span> Verdict
+          </h2>
+          <p className="text-muted-foreground font-medium max-w-xl mx-auto">
+            Real engineers, real results. Our alumni are shipping at scale.
+          </p>
+        </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-6 border-gray-200">
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {[
+              {
+                quote: "The React course transformed my career in 6 weeks. Projects are production-grade and the teaching style is unlike anything I've seen.",
+                name: "Emma Thompson",
+                role: "Full Stack Eng. @ Stripe",
+                img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop",
+                stars: 5,
+              },
+              {
+                quote: "Best technical investment I've made. Python data science course got me a Senior ML role at a fintech unicorn.",
+                name: "James Rodriguez",
+                role: "ML Engineer @ Plaid",
+                img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+                stars: 5,
+              },
+            ].map((t, i) => (
+              <div
+                key={i}
+                className="glass-card p-10 rounded-[3rem] border-white/5 relative group hover:border-primary/20 hover:-translate-y-2 transition-all duration-500"
+              >
+                {/* Stars */}
+                <div className="flex gap-1 mb-6">
+                  {Array.from({ length: t.stars }).map((_, s) => (
+                    <Star key={s} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-6 italic">"{testimonial.content}"</p>
-                <div className="flex items-center gap-3">
-                  <Avatar>
-                    <AvatarImage src={testimonial.avatar} />
-                    <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
+                <p className="text-lg font-semibold mb-8 text-foreground/90 leading-relaxed italic">
+                  "{t.quote}"
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="relative w-14 h-14 rounded-2xl overflow-hidden border-2 border-primary/20 shadow-xl">
+                    <NextImage src={t.img} alt={t.name} fill className="object-cover" />
+                  </div>
                   <div>
-                    <div className="font-semibold">{testimonial.name}</div>
-                    <div className="text-sm text-gray-600">{testimonial.role}</div>
+                    <p className="font-black text-lg leading-tight">{t.name}</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-primary mt-0.5">{t.role}</p>
                   </div>
                 </div>
-              </Card>
+                {/* Decorative Quote */}
+                <div className="absolute top-6 right-8 text-primary/10 group-hover:text-primary/20 transition-colors">
+                  <svg className="w-16 h-16 fill-current" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+                </div>
+              </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CTA BANNER ───────────────────────────────────────────────────── */}
+      <section className="relative z-10 py-28">
+        <div className="container mx-auto px-4">
+          <div className="relative glass-card rounded-[4rem] p-16 lg:p-24 border-primary/20 overflow-hidden text-center">
+            {/* Background Gradients */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-pink-500/10 opacity-60 pointer-events-none" />
+            <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse-slow pointer-events-none" />
+            <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-violet-600/15 rounded-full blur-[120px] animate-float pointer-events-none" />
+            {/* Top Line */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+
+            <div className="relative z-10 max-w-3xl mx-auto">
+              <Badge className="glass border-primary/20 text-primary font-black uppercase tracking-[0.3em] text-[9px] px-5 py-2 mb-8 inline-flex">
+                Join the 1% of Engineers
+              </Badge>
+              <h2 className="text-4xl md:text-7xl font-black mb-8 tracking-tighter leading-[0.95]">
+                Ready to Build{" "}
+                <span className="text-gradient">Something Iconic?</span>
+              </h2>
+              <p className="text-xl mb-12 text-muted-foreground font-medium leading-relaxed">
+                Enroll today and get instant access to our entire ecosystem.
+                The future belongs to those who build it.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/sign-up">
+                  <Button
+                    size="lg"
+                    className="h-18 px-12 rounded-[1.75rem] text-base font-black uppercase tracking-widest bg-primary hover:bg-primary/90 shadow-[0_0_40px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_60px_hsl(var(--primary)/0.5)] group transition-all"
+                  >
+                    Start Your Journey
+                    <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-2 transition-transform" />
+                  </Button>
+                </Link>
+                <Link href="/courses">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="h-18 px-12 rounded-[1.75rem] text-base font-black uppercase tracking-widest glass border-white/10 hover:border-primary/30 hover:bg-primary/5 transition-all"
+                  >
+                    Browse Free Modules
+                  </Button>
+                </Link>
+              </div>
+              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-muted-foreground opacity-40 mt-10">
+                No Lock-In • Cancel Anytime • Expert Support
+              </p>
+            </div>
           </div>
         </div>
       </section>

@@ -23,9 +23,9 @@ export function QuizResults({
   const percentage = Math.round((score / totalQuestions) * 100)
 
   return (
-    <Card className="text-center">
+    <Card className="text-center hover:shadow-lg transition-all duration-300 theme-transition">
       <CardHeader>
-        <CardTitle className={`text-2xl ${passed ? "text-green-600" : "text-red-600"}`}>
+        <CardTitle className={`text-2xl ${passed ? "text-green-600" : "text-destructive"} theme-transition`}>
           {passed ? "🎉 Congratulations!" : "❌ Quiz Failed"}
         </CardTitle>
         <CardDescription>

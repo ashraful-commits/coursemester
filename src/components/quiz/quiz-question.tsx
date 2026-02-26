@@ -29,7 +29,7 @@ export function QuizQuestion({
   correctAnswer,
 }: QuizQuestionProps) {
   return (
-    <Card className="mb-6">
+    <Card className="mb-6 hover:shadow-md transition-all duration-300 theme-transition">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <span className="text-lg font-semibold">{question.question}</span>

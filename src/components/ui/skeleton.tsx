@@ -1,63 +1,64 @@
+function SkeletonBase({ className = "" }: { className?: string }) {
+  return (
+    <div
+      className={`skeleton rounded-xl ${className}`}
+    />
+  )
+}
+
 export function CourseCardSkeleton() {
   return (
-    <div className="group overflow-hidden border-0 shadow-lg rounded-2xl">
-      {/* Course Image Skeleton */}
-      <div className="relative h-48 bg-gray-200 animate-pulse"></div>
-      
-      <div className="p-5 space-y-4">
-        {/* Category and Level Badges Skeleton */}
-        <div className="flex justify-between items-center mb-3">
-          <div className="h-5 w-20 bg-gray-200 rounded-full animate-pulse"></div>
-          <div className="h-5 w-16 bg-gray-200 rounded-full animate-pulse"></div>
+    <div className="glass-card rounded-[2.5rem] border-white/5 overflow-hidden">
+      {/* Image placeholder */}
+      <SkeletonBase className="h-56 rounded-none rounded-t-[2.5rem]" />
+
+      <div className="p-8 space-y-5">
+        {/* Badge row */}
+        <div className="flex gap-3">
+          <SkeletonBase className="h-7 w-28 rounded-xl" />
         </div>
 
-        {/* Title Skeleton */}
+        {/* Title */}
+        <div className="space-y-2.5">
+          <SkeletonBase className="h-7 w-full" />
+          <SkeletonBase className="h-7 w-3/4" />
+        </div>
+
+        {/* Description */}
         <div className="space-y-2">
-          <div className="h-6 bg-gray-200 rounded animate-pulse"></div>
-          <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
+          <SkeletonBase className="h-4 w-full" />
+          <SkeletonBase className="h-4 w-5/6" />
         </div>
 
-        {/* Rating and Students Skeleton */}
-        <div className="flex items-center gap-2">
-          <div className="flex gap-1">
-            {[...Array(5)].map((_, i) => (
-              <div key={i} className="h-4 w-4 bg-gray-200 rounded animate-pulse"></div>
-            ))}
-          </div>
-          <div className="h-4 w-12 bg-gray-200 rounded animate-pulse"></div>
-          <div className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
+        {/* Stats row */}
+        <div className="grid grid-cols-2 gap-3 pt-2">
+          <SkeletonBase className="h-12 rounded-2xl" />
+          <SkeletonBase className="h-12 rounded-2xl" />
         </div>
 
-        {/* Instructor Skeleton */}
-        <div className="flex items-center gap-2">
-          <div className="h-8 w-8 bg-gray-200 rounded-full animate-pulse"></div>
-          <div className="space-y-1">
-            <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
-            <div className="h-3 w-16 bg-gray-200 rounded animate-pulse"></div>
-          </div>
-        </div>
-
-        {/* Duration and Lessons Skeleton */}
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1">
-            <div className="h-4 w-4 bg-gray-200 rounded animate-pulse"></div>
-            <div className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
-          </div>
-          <div className="flex items-center gap-1">
-            <div className="h-4 w-4 bg-gray-200 rounded animate-pulse"></div>
-            <div className="h-4 w-20 bg-gray-200 rounded animate-pulse"></div>
-          </div>
-        </div>
-
-        {/* Price and CTA Skeleton */}
-        <div className="flex items-center justify-between">
-          <div className="space-y-1">
-            <div className="h-8 w-20 bg-gray-200 rounded animate-pulse"></div>
-            <div className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
-          </div>
-          <div className="h-10 w-24 bg-gray-200 rounded-lg animate-pulse"></div>
+        {/* Footer */}
+        <div className="flex items-center justify-between pt-4 border-t border-white/5">
+          <SkeletonBase className="h-8 w-24 rounded-xl" />
+          <SkeletonBase className="h-8 w-20 rounded-xl" />
         </div>
       </div>
     </div>
   )
+}
+
+export function DashboardStatSkeleton() {
+  return (
+    <div className="glass-card rounded-[2.5rem] border-white/5 p-8">
+      <div className="flex justify-between items-start mb-8">
+        <SkeletonBase className="w-14 h-14 rounded-2xl" />
+        <SkeletonBase className="w-16 h-6 rounded-full" />
+      </div>
+      <SkeletonBase className="h-10 w-1/2 mb-2" />
+      <SkeletonBase className="h-4 w-2/3" />
+    </div>
+  )
+}
+
+export function Skeleton({ className = "" }: { className?: string }) {
+  return <SkeletonBase className={className} />
 }
