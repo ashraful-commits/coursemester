@@ -180,8 +180,8 @@ export default function MyLearningPage() {
                 key={f}
                 onClick={() => setActiveFilter(f)}
                 className={`px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 ${activeFilter === f
-                    ? "bg-primary text-primary-foreground shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
-                    : "text-muted-foreground hover:text-foreground"
+                  ? "bg-primary text-primary-foreground shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
+                  : "text-muted-foreground hover:text-foreground"
                   }`}
               >
                 {f === "all" ? `All (${mockEnrolledCourses.length})` :
@@ -227,8 +227,8 @@ export default function MyLearningPage() {
                   <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-black/40">
                     <div
                       className={`h-full rounded-full transition-all duration-1000 ${course.progress === 100
-                          ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]"
-                          : "bg-primary shadow-[0_0_8px_hsl(var(--primary)/0.5)]"
+                        ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]"
+                        : "bg-primary shadow-[0_0_8px_hsl(var(--primary)/0.5)]"
                         }`}
                       style={{ width: `${course.progress}%` }}
                     />
@@ -271,8 +271,8 @@ export default function MyLearningPage() {
                         <div className="h-2 bg-white/5 rounded-full overflow-hidden ring-1 ring-white/5">
                           <div
                             className={`h-full rounded-full transition-all duration-1000 ease-out ${course.progress === 100
-                                ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.4)]"
-                                : "bg-primary shadow-[0_0_8px_hsl(var(--primary)/0.4)]"
+                              ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.4)]"
+                              : "bg-primary shadow-[0_0_8px_hsl(var(--primary)/0.4)]"
                               }`}
                             style={{ width: `${course.progress}%` }}
                           />
@@ -306,10 +306,12 @@ export default function MyLearningPage() {
                               Review
                             </Button>
                           </Link>
-                          <Button className="h-12 px-6 rounded-2xl glass border-amber-400/20 bg-amber-400/10 text-amber-400 font-black uppercase tracking-widest text-[9px] hover:bg-amber-400/20 transition-all w-full lg:w-auto">
-                            <Award className="w-3.5 h-3.5 mr-2" />
-                            Certificate
-                          </Button>
+                          <Link href={`/courses/${course.id}/certificate`} className="w-full lg:w-auto">
+                            <Button className="h-12 px-6 rounded-2xl glass border-amber-400/20 bg-amber-400/10 text-amber-400 font-black uppercase tracking-widest text-[9px] hover:bg-amber-400/20 transition-all w-full lg:w-auto">
+                              <Award className="w-3.5 h-3.5 mr-2" />
+                              Certificate
+                            </Button>
+                          </Link>
                         </>
                       ) : (
                         <Link href={`/courses/${course.id}/learn`} className="w-full lg:w-auto">
@@ -368,10 +370,12 @@ export default function MyLearningPage() {
                   </p>
                 </div>
               </div>
-              <Button className="h-12 px-8 rounded-2xl font-black uppercase tracking-widest text-[10px] bg-amber-400 hover:bg-amber-400/90 text-black shadow-[0_0_20px_rgba(251,191,36,0.3)] transition-all group shrink-0">
-                <Download className="w-4 h-4 mr-2" />
-                Download Certificate
-              </Button>
+              <Link href="/courses/2/certificate">
+                <Button className="h-12 px-8 rounded-2xl font-black uppercase tracking-widest text-[10px] bg-amber-400 hover:bg-amber-400/90 text-black shadow-[0_0_20px_rgba(251,191,36,0.3)] transition-all group shrink-0">
+                  <Download className="w-4 h-4 mr-2" />
+                  Download Certificate
+                </Button>
+              </Link>
             </div>
           </div>
         )}

@@ -97,6 +97,21 @@ export default function LearnPage({ params }: { params: Promise<{ courseId: stri
     )
   }
 
+  const allLessons = course.chapters.flatMap((c: any) => c.lessons)
+  const currentIndex = allLessons.findIndex((l: any) => l.id === selectedLesson.id)
+
+  const handleNext = () => {
+    if (currentIndex < allLessons.length - 1) {
+      setSelectedLesson(allLessons[currentIndex + 1])
+    }
+  }
+
+  const handlePrevious = () => {
+    if (currentIndex > 0) {
+      setSelectedLesson(allLessons[currentIndex - 1])
+    }
+  }
+
   return (
     <div className="min-h-screen bg-black flex flex-col pt-24">
       {/* Top Header / Nav Bar (already in layout, but we need secondary one for player) */}
@@ -126,9 +141,11 @@ export default function LearnPage({ params }: { params: Promise<{ courseId: stri
           <Button variant="ghost" size="icon" className="h-10 w-10 glass border-white/5 rounded-xl text-muted-foreground hover:text-primary">
             <Share2 className="w-4 h-4" />
           </Button>
-          <Button variant="ghost" size="icon" className="h-10 w-10 glass border-white/5 rounded-xl text-muted-foreground hover:text-primary">
-            <Award className="w-4 h-4" />
-          </Button>
+          <Link href={`/courses/${courseId}/certificate`}>
+            <Button variant="ghost" size="icon" className="h-10 w-10 glass border-white/5 rounded-xl text-muted-foreground hover:text-primary">
+              <Award className="w-4 h-4" />
+            </Button>
+          </Link>
           <Button
             variant="ghost"
             size="icon"
@@ -179,10 +196,19 @@ export default function LearnPage({ params }: { params: Promise<{ courseId: stri
                     <h2 className="text-2xl md:text-3xl font-black tracking-tighter">{selectedLesson.title}</h2>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Button variant="outline" className="glass border-white/5 h-12 rounded-xl font-black uppercase tracking-widest text-[9px] px-6">
+                    <Button
+                      variant="outline"
+                      onClick={handlePrevious}
+                      disabled={currentIndex === 0}
+                      className="glass border-white/5 h-12 rounded-xl font-black uppercase tracking-widest text-[9px] px-6"
+                    >
                       <SkipBack className="w-4 h-4 mr-2" /> Previous
                     </Button>
-                    <Button className="h-12 px-8 rounded-xl font-black uppercase tracking-widest text-[9px] bg-primary hover:bg-primary/90 shadow-[0_0_15px_rgba(124,58,237,0.3)] group transition-all">
+                    <Button
+                      onClick={handleNext}
+                      disabled={currentIndex === allLessons.length - 1}
+                      className="h-12 px-8 rounded-xl font-black uppercase tracking-widest text-[9px] bg-primary hover:bg-primary/90 shadow-[0_0_15px_rgba(124,58,237,0.3)] group transition-all"
+                    >
                       Next Operation <SkipForward className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
                     </Button>
                   </div>
@@ -413,15 +439,15 @@ export default function LearnPage({ params }: { params: Promise<{ courseId: stri
                           key={lesson.id}
                           onClick={() => setSelectedLesson(lesson)}
                           className={`flex items-start gap-4 p-4 rounded-2xl border transition-all cursor-pointer group/item ${selectedLesson.id === lesson.id
-                              ? 'bg-primary/10 border-primary/30 shadow-[0_0_20px_rgba(124,58,237,0.1)]'
-                              : 'bg-white/[0.02] border-white/5 hover:border-white/20'
+                            ? 'bg-primary/10 border-primary/30 shadow-[0_0_20px_rgba(124,58,237,0.1)]'
+                            : 'bg-white/[0.02] border-white/5 hover:border-white/20'
                             }`}
                         >
                           <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all ${lesson.completed
-                              ? 'bg-green-500/20 text-green-500'
-                              : selectedLesson.id === lesson.id
-                                ? 'bg-primary text-primary-foreground'
-                                : 'bg-white/10 text-muted-foreground group-hover/item:text-primary transition-all'
+                            ? 'bg-green-500/20 text-green-500'
+                            : selectedLesson.id === lesson.id
+                              ? 'bg-primary text-primary-foreground'
+                              : 'bg-white/10 text-muted-foreground group-hover/item:text-primary transition-all'
                             }`}>
                             {lesson.completed ? (
                               <CheckCircle className="w-4 h-4" />

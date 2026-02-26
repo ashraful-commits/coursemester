@@ -44,7 +44,7 @@ const stats = [
 
 export function Footer() {
     return (
-        <footer className="relative border-t border-white/5 bg-background/80 backdrop-blur-xl overflow-hidden">
+        <footer className="relative border-t border-white/5 bg-background/80 backdrop-blur-xl overflow-hidden print:hidden">
             {/* Background glow */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60%] h-[60%] bg-primary/4 rounded-full blur-[120px] pointer-events-none" />
 

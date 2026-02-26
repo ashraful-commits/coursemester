@@ -30,13 +30,53 @@ export default function CertificatePage({ params }: { params: Promise<{ courseId
     }
 
     return (
-        <div className="min-h-screen bg-background relative overflow-hidden pb-24">
-            <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-                <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-amber-500/6 rounded-full blur-[140px] animate-pulse-slow" />
+        <div className="min-h-screen bg-background relative overflow-hidden pb-24 print:pb-0 print:overflow-visible print:bg-white">
+            <style jsx global>{`
+                @media print {
+                    @page {
+                        size: landscape;
+                        margin: 0;
+                    }
+                    body {
+                        background: #0a0a0a !important; /* Keep it dark for the PDF if that's the design */
+                        -webkit-print-color-adjust: exact;
+                        print-color-adjust: exact;
+                    }
+                    .print-container {
+                        width: 100vw !important;
+                        height: 100vh !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        background: #0a0a0a !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+                    .certificate-wrap {
+                        width: 270mm !important;
+                        height: 180mm !important;
+                        margin: 0 !important;
+                        border: 1px solid rgba(251, 191, 36, 0.3) !important;
+                        background: rgba(255, 255, 255, 0.04) !important;
+                        backdrop-filter: blur(20px) !important;
+                        border-radius: 3rem !important;
+                        box-shadow: 0 0 80px rgba(251, 191, 36, 0.1) !important;
+                    }
+                    .text-gradient-gold {
+                        color: #fbbf24 !important;
+                        background: none !important;
+                        -webkit-background-clip: unset !important;
+                        -webkit-text-fill-color: initial !important;
+                    }
+                }
+            `}</style>
+
+            <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden print:hidden">
+                <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-primary/10 rounded-full blur-[140px] animate-pulse-slow" />
                 <div className="absolute bottom-0 left-0 w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px] animate-float" />
             </div>
 
-            <div className="relative z-10 pt-32 pb-14 border-b border-white/5 bg-white/[0.01] backdrop-blur-xl">
+            <div className="relative z-10 pt-32 pb-14 border-b border-white/5 bg-white/[0.01] backdrop-blur-xl print:hidden">
                 <div className="container mx-auto px-4">
                     <Link href="/dashboard">
                         <Button variant="ghost" className="mb-8 text-muted-foreground hover:text-primary font-black uppercase tracking-widest text-[10px] -ml-3 h-10 group">
@@ -44,25 +84,25 @@ export default function CertificatePage({ params }: { params: Promise<{ courseId
                             Back to My Learning
                         </Button>
                     </Link>
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/20 mb-5">
-                        <Award className="w-3 h-3 text-amber-400" />
-                        <span className="text-[9px] font-black uppercase tracking-[0.25em] text-amber-400">Achievement Unlocked</span>
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-5">
+                        <Award className="w-3 h-3 text-primary" />
+                        <span className="text-[9px] font-black uppercase tracking-[0.25em] text-primary">Achievement Unlocked</span>
                     </div>
                     <h1 className="text-5xl md:text-6xl font-black tracking-tighter leading-none mb-3">
-                        Your <span className="text-gradient-gold">Certificate</span>
+                        Your <span className="text-gradient">Certificate</span>
                     </h1>
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 py-14 relative z-10">
-                <div className="max-w-5xl mx-auto">
+            <div className="container mx-auto px-4 py-14 relative z-10 print-container">
+                <div className="max-w-5xl mx-auto print:max-w-none">
                     {/* Certificate Preview */}
-                    <div className="relative mb-10 animate-fadeInUp">
-                        <div className="glass-card rounded-[3rem] border-amber-400/20 overflow-hidden shadow-[0_0_80px_rgba(251,191,36,0.1)] relative">
+                    <div className="relative mb-10 animate-fadeInUp print:m-0 print:animate-none">
+                        <div className="certificate-wrap glass-card rounded-[3rem] border-amber-400/20 overflow-hidden shadow-[0_0_80px_rgba(251,191,36,0.1)] relative print:bg-white/[0.04]">
                             {/* Top gradient bar */}
                             <div className="h-2 bg-gradient-to-r from-amber-400 via-yellow-300 to-orange-400" />
 
-                            <div className="p-16 text-center relative">
+                            <div className="p-16 text-center relative print:p-16">
                                 {/* Corner Decorations */}
                                 <div className="absolute top-6 left-6 w-16 h-16 border-t-2 border-l-2 border-amber-400/30 rounded-tl-3xl" />
                                 <div className="absolute top-6 right-6 w-16 h-16 border-t-2 border-r-2 border-amber-400/30 rounded-tr-3xl" />
@@ -145,8 +185,11 @@ export default function CertificatePage({ params }: { params: Promise<{ courseId
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-fadeInUp delay-200">
-                        <Button className="flex-1 h-16 rounded-2xl font-black uppercase tracking-widest text-[11px] bg-amber-400 hover:bg-amber-400/90 text-black shadow-[0_0_30px_rgba(251,191,36,0.3)] group transition-all">
+                    <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-fadeInUp delay-200 print:hidden">
+                        <Button
+                            onClick={() => window.print()}
+                            className="flex-1 h-16 rounded-2xl font-black uppercase tracking-widest text-[11px] bg-primary hover:bg-primary/90 text-primary-foreground shadow-[0_0_30px_hsl(var(--primary)/0.3)] group transition-all"
+                        >
                             <Download className="w-5 h-5 mr-2" />
                             Download Certificate (PDF)
                         </Button>
@@ -161,7 +204,7 @@ export default function CertificatePage({ params }: { params: Promise<{ courseId
                     </div>
 
                     {/* Post-Completion Info */}
-                    <div className="grid md:grid-cols-3 gap-5 animate-fadeInUp delay-300">
+                    <div className="grid md:grid-cols-3 gap-5 animate-fadeInUp delay-300 print:hidden">
                         {[
                             { icon: CheckCircle, title: "Verified by CodeMaster", desc: "Your certificate includes a unique ID for employer verification.", color: "text-emerald-400", bg: "bg-emerald-400/10", border: "border-emerald-400/20" },
                             { icon: BookOpen, title: "Keep Learning", desc: "Explore related courses and continue building your skill stack.", color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" },
@@ -179,5 +222,5 @@ export default function CertificatePage({ params }: { params: Promise<{ courseId
                 </div>
             </div>
         </div>
-    )
+    );
 }

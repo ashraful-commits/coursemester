@@ -118,9 +118,9 @@ export function Navbar() {
       )}
 
       <header
-        className={`fixed top-0 z-50 w-full transition-all duration-500 ${scrolled
-            ? "glass border-b border-white/5 shadow-[0_4px_40px_rgba(0,0,0,0.3)] bg-background/80 backdrop-blur-2xl py-0"
-            : "bg-transparent backdrop-blur-sm py-2"
+        className={`fixed top-0 z-50 w-full transition-all duration-500 print:hidden ${scrolled
+          ? "glass border-b border-white/5 shadow-[0_4px_40px_rgba(0,0,0,0.3)] bg-background/80 backdrop-blur-2xl py-0"
+          : "bg-transparent backdrop-blur-sm py-2"
           }`}
       >
         <div className="container mx-auto px-4 h-24 flex items-center justify-between gap-4">
