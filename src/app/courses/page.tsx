@@ -157,7 +157,7 @@ export default function CoursesPage() {
       </div>
 
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative pt-32 pb-16 lg:pt-52 lg:pb-36 z-10">
+      <section className="relative pt-24 pb-12 lg:pt-52 lg:pb-36 z-10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full glass border-primary/20 mb-6 sm:mb-8 animate-fadeIn">
@@ -167,32 +167,31 @@ export default function CoursesPage() {
               </span>
             </div>
 
-            <h1 className="text-4xl xs:text-5xl lg:text-8xl font-black mb-6 sm:mb-8 leading-[0.95] tracking-tighter animate-fadeInUp">
+            <h1 className="text-3xl xs:text-5xl lg:text-8xl font-black mb-6 sm:mb-8 leading-[1] tracking-tighter animate-fadeInUp">
               Master the{" "}
               <span className="text-gradient">
                 Unknown
               </span>
             </h1>
 
-            <p className="text-lg lg:text-2xl mb-12 sm:mb-16 text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed animate-fadeInUp delay-100 px-4">
+            <p className="text-base sm:text-lg lg:text-2xl mb-12 sm:mb-16 text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed animate-fadeInUp delay-100 px-4">
               Project-driven learning for high-performance engineers.
-              Join <strong className="text-foreground font-black">15,000+</strong> elite students mastering production-grade systems.
             </p>
 
             {/* Stat Nodes */}
-            <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto animate-fadeInUp delay-200">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto animate-fadeInUp delay-200">
               {platformStats.map((stat, i) => (
                 <div
                   key={i}
-                  className="glass-card group p-5 sm:p-6 rounded-[2rem] border-white/5 hover:border-primary/20 hover:-translate-y-2 transition-all duration-500 cursor-default"
+                  className="glass-card group p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] border-white/5 hover:border-primary/20 hover:-translate-y-1 transition-all duration-500 cursor-default"
                 >
-                  <div className={`w-10 h-10 sm:w-12 sm:h-12 ${stat.bg} rounded-2xl flex items-center justify-center mb-3 sm:mb-4 mx-auto group-hover:scale-110 transition-transform duration-500`}>
-                    <stat.icon className={`h-5 w-5 sm:h-6 sm:w-6 ${stat.color}`} />
+                  <div className={`w-8 h-8 sm:w-12 sm:h-12 ${stat.bg} rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-4 mx-auto group-hover:scale-110 transition-transform duration-500`}>
+                    <stat.icon className={`h-4 w-4 sm:h-6 sm:w-6 ${stat.color}`} />
                   </div>
-                  <div className="text-2xl sm:text-3xl font-black text-foreground mb-1 tracking-tighter tabular-nums">
+                  <div className="text-xl sm:text-3xl font-black text-foreground mb-0.5 tracking-tighter tabular-nums">
                     {stat.value}
                   </div>
-                  <div className="text-[8px] sm:text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground opacity-50">
+                  <div className="text-[7px] sm:text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground opacity-50">
                     {stat.label}
                   </div>
                 </div>
@@ -203,51 +202,52 @@ export default function CoursesPage() {
       </section>
 
       {/* ─── STICKY SEARCH BAR ────────────────────────────────────────────── */}
-      <div className="sticky top-16 sm:top-24 z-40 py-4 sm:py-5 glass border-y border-white/5 bg-background/60 backdrop-blur-xl">
+      <div className="sticky top-16 sm:top-24 z-40 py-3 sm:py-5 glass border-y border-white/5 bg-background/60 backdrop-blur-xl">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
             {/* Search */}
             <div className="relative flex-1 group">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors z-10" />
+              <Search className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 h-4 sm:h-5 w-4 sm:w-5 text-muted-foreground group-focus-within:text-primary transition-colors z-10" />
               <Input
                 placeholder="Search modules..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-14 h-12 sm:h-14 text-sm sm:text-base border-white/5 bg-white/5 focus:bg-white/8 focus:border-primary/40 rounded-xl sm:rounded-2xl transition-all font-semibold placeholder:text-muted-foreground/40"
+                className="pl-11 sm:pl-14 h-11 sm:h-14 text-xs sm:text-base border-white/5 bg-white/5 focus:bg-white/8 focus:border-primary/40 rounded-xl sm:rounded-2xl transition-all font-semibold placeholder:text-muted-foreground/40"
               />
             </div>
 
-            <div className="flex flex-wrap sm:flex-nowrap gap-3">
-              {/* Domain Filter */}
-              <Select value={activeCategory} onValueChange={setActiveCategory}>
-                <SelectTrigger className="h-12 sm:h-14 flex-1 sm:min-w-[180px] border-white/5 bg-white/5 rounded-xl sm:rounded-2xl font-bold focus:ring-primary/30 focus:border-primary/40 text-xs sm:text-sm">
-                  <SelectValue placeholder="All Domains" />
-                </SelectTrigger>
-                <SelectContent className="glass border-white/10 rounded-2xl shadow-2xl">
-                  {categories.map((cat) => (
-                    <SelectItem key={cat.value} value={cat.value} className="font-bold rounded-xl text-xs sm:text-sm">
-                      {cat.label} ({cat.count})
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            <div className="flex flex-row gap-2 sm:gap-3">
+              <div className="flex-1 grid grid-cols-2 gap-2 sm:flex sm:gap-3">
+                {/* Domain Filter */}
+                <Select value={activeCategory} onValueChange={setActiveCategory}>
+                  <SelectTrigger className="h-11 sm:h-14 min-w-0 sm:min-w-[180px] border-white/5 bg-white/5 rounded-xl sm:rounded-2xl font-bold focus:ring-primary/30 focus:border-primary/40 text-[10px] sm:text-sm px-3">
+                    <SelectValue placeholder="Domain" />
+                  </SelectTrigger>
+                  <SelectContent className="glass border-white/10 rounded-2xl shadow-2xl">
+                    {categories.map((cat) => (
+                      <SelectItem key={cat.value} value={cat.value} className="font-bold rounded-xl text-xs sm:text-sm">
+                        {cat.label} ({cat.count})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
 
-              {/* Sort */}
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="h-12 sm:h-14 flex-1 sm:min-w-[160px] border-white/5 bg-white/5 rounded-xl sm:rounded-2xl font-bold focus:ring-primary/30 text-xs sm:text-sm">
-                  <SelectValue placeholder="Sort By" />
-                </SelectTrigger>
-                <SelectContent className="glass border-white/10 rounded-2xl shadow-2xl">
-                  <SelectItem value="popular" className="font-bold rounded-xl text-xs sm:text-sm">Most Popular</SelectItem>
-                  <SelectItem value="newest" className="font-bold rounded-xl text-xs sm:text-sm">Newest</SelectItem>
-                  <SelectItem value="rating" className="font-bold rounded-xl text-xs sm:text-sm">Highest Rated</SelectItem>
-                  <SelectItem value="free" className="font-bold rounded-xl text-xs sm:text-sm">Free First</SelectItem>
-                </SelectContent>
-              </Select>
+                {/* Sort */}
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="h-11 sm:h-14 min-w-0 sm:min-w-[160px] border-white/5 bg-white/5 rounded-xl sm:rounded-2xl font-bold focus:ring-primary/30 text-[10px] sm:text-sm px-3">
+                    <SelectValue placeholder="Sort" />
+                  </SelectTrigger>
+                  <SelectContent className="glass border-white/10 rounded-2xl shadow-2xl">
+                    <SelectItem value="popular" className="font-bold rounded-xl text-xs sm:text-sm">Most Popular</SelectItem>
+                    <SelectItem value="newest" className="font-bold rounded-xl text-xs sm:text-sm">Newest</SelectItem>
+                    <SelectItem value="rating" className="font-bold rounded-xl text-xs sm:text-sm">Highest Rated</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-              <Button className="h-12 sm:h-14 px-6 sm:px-8 rounded-xl sm:rounded-2xl font-black uppercase tracking-widest text-[9px] sm:text-[11px] bg-primary hover:bg-primary/90 shadow-[0_0_20px_hsl(var(--primary)/0.3)] transition-all shrink-0 ml-auto">
-                <Filter className="h-3.5 sm:h-4 w-3.5 sm:w-4 mr-2" />
-                Apply
+              <Button className="h-11 sm:h-14 px-4 sm:px-8 rounded-xl sm:rounded-2xl font-black uppercase tracking-widest text-[9px] sm:text-[11px] bg-primary hover:bg-primary/90 transition-all shrink-0">
+                <Filter className="h-3.5 sm:h-4 w-3.5 sm:w-4 sm:mr-2" />
+                <span className="hidden sm:inline">Apply</span>
               </Button>
             </div>
           </div>
@@ -255,23 +255,20 @@ export default function CoursesPage() {
       </div>
 
       {/* ─── CATEGORY PILLS ───────────────────────────────────────────────── */}
-      <div className="relative z-10 py-8">
+      <div className="relative z-10 py-6 sm:py-8">
         <div className="container mx-auto px-4">
-          <div className="flex gap-3 flex-wrap">
+          <div className="flex gap-2 sm:gap-3 overflow-x-auto no-scrollbar pb-2 sm:pb-0 sm:flex-wrap">
             {categories.map((cat) => (
               <button
                 key={cat.value}
                 onClick={() => setActiveCategory(cat.value)}
-                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all duration-300 ${activeCategory === cat.value
+                className={`inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl sm:rounded-2xl text-[9px] sm:text-[11px] font-black uppercase tracking-widest transition-all duration-300 whitespace-nowrap ${activeCategory === cat.value
                   ? "bg-primary text-primary-foreground shadow-[0_0_20px_hsl(var(--primary)/0.3)]"
                   : "glass border-white/5 text-muted-foreground hover:text-foreground hover:border-primary/20"
                   }`}
               >
-                <cat.icon className="w-3.5 h-3.5" />
+                <cat.icon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 {cat.label}
-                <span className={`text-[9px] ${activeCategory === cat.value ? "opacity-70" : "opacity-40"}`}>
-                  {cat.count}
-                </span>
               </button>
             ))}
           </div>
@@ -279,35 +276,33 @@ export default function CoursesPage() {
       </div>
 
       {/* ─── COURSE GRID ──────────────────────────────────────────────────── */}
-      <section className="py-12 relative z-10">
+      <section className="py-6 sm:py-12 relative z-10">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 sm:mb-12 gap-6">
             <div>
-              <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-2">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter mb-1 select-none">
                 Active <span className="text-gradient">Deployments</span>
               </h2>
-              <p className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground opacity-50">
-                {mockCourses.length} modules synced • Updated daily
+              <p className="text-[9px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground opacity-50">
+                {mockCourses.length} modules synced
               </p>
             </div>
-            <div className="flex gap-2 p-1.5 glass rounded-2xl border-white/5">
+            <div className="flex gap-1.5 p-1 glass rounded-xl sm:rounded-2xl border-white/5 w-full sm:w-auto">
               {["Popular", "Trending", "New"].map((tab) => (
-                <Button
+                <button
                   key={tab}
-                  variant="ghost"
-                  size="sm"
-                  className={`rounded-xl font-black uppercase tracking-widest text-[9px] px-4 h-9 transition-all ${tab === "Popular"
-                    ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                    : "hover:bg-white/10 text-muted-foreground"
+                  className={`flex-1 sm:flex-none rounded-lg sm:rounded-xl font-black uppercase tracking-widest text-[8px] sm:text-[9px] px-3 sm:px-4 h-8 sm:h-9 transition-all ${tab === "Popular"
+                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                    : "hover:bg-white/5 text-muted-foreground"
                     }`}
                 >
                   {tab}
-                </Button>
+                </button>
               ))}
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {isLoading
               ? Array.from({ length: 6 }).map((_, i) => (
                 <CourseCardSkeleton key={i} />
@@ -324,92 +319,80 @@ export default function CoursesPage() {
           </div>
 
           {/* Load More */}
-          <div className="text-center mt-24 space-y-5">
+          <div className="text-center mt-16 sm:mt-24 space-y-4">
             <Button
               variant="outline"
               size="lg"
               onClick={handleLoadMore}
               disabled={isLoading}
-              className="glass border-white/10 hover:border-primary/30 hover:bg-primary/5 h-16 px-12 rounded-2xl font-black uppercase tracking-widest text-[11px] group shadow-2xl transition-all"
+              className="glass border-white/10 hover:border-primary/30 h-14 sm:h-16 px-8 sm:px-12 rounded-xl sm:rounded-2xl font-black uppercase tracking-widest text-[9px] sm:text-[11px] group transition-all w-full sm:w-auto"
             >
               {isLoading ? (
                 <span className="flex items-center gap-3">
-                  <span className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-                  Syncing Nodes...
+                  <span className="w-3 h-3 sm:w-4 sm:h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                  Syncing...
                 </span>
               ) : (
-                <span className="flex items-center gap-3">
+                <span className="flex items-center gap-2 sm:gap-3">
                   Expand Horizon
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               )}
             </Button>
-            <p className="text-[9px] font-black uppercase tracking-[0.3em] text-muted-foreground opacity-40">
+            <p className="text-[8px] sm:text-[9px] font-black uppercase tracking-[0.3em] text-muted-foreground opacity-40">
               Showing {mockCourses.length} of 384 modules
             </p>
           </div>
         </div>
       </section>
 
-      {/* ─── SOCIAL PROOF MARQUEE ─────────────────────────────────────────── */}
-      <section className="relative z-10 py-20 overflow-hidden border-t border-white/5">
-        <div className="container mx-auto px-4 text-center mb-12">
-          <Badge className="glass border-white/10 font-black uppercase tracking-[0.25em] text-[9px] px-4 py-2 mb-6">
+      {/* ─── SOCIAL PROOF ─────────────────────────────────────────── */}
+      <section className="relative z-10 py-16 sm:py-20 overflow-hidden border-t border-white/5 bg-white/[0.01]">
+        <div className="container mx-auto px-4 text-center mb-10 sm:mb-12">
+          <Badge className="glass border-white/10 font-black uppercase tracking-[0.25em] text-[8px] sm:text-[9px] px-3 py-1.5 mb-6">
             Trusted by elite engineers
           </Badge>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter mb-4">
             The <span className="text-gradient">Operator</span> Verdict
           </h2>
-          <p className="text-muted-foreground font-medium max-w-xl mx-auto">
-            Real engineers, real results. Our alumni are shipping at scale.
-          </p>
         </div>
 
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
             {[
               {
-                quote: "The React course transformed my career in 6 weeks. Projects are production-grade and the teaching style is unlike anything I've seen.",
-                name: "Emma Thompson",
-                role: "Full Stack Eng. @ Stripe",
+                quote: "The React course transformed my career in 6 weeks. Projects are production-grade.",
+                name: "EmmaThompson",
+                role: "Eng. @ Stripe",
                 img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop",
-                stars: 5,
               },
               {
-                quote: "Best technical investment I've made. Python data science course got me a Senior ML role at a fintech unicorn.",
+                quote: "Python data science course got me a Senior ML role at a fintech unicorn.",
                 name: "James Rodriguez",
                 role: "ML Engineer @ Plaid",
                 img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
-                stars: 5,
               },
             ].map((t, i) => (
               <div
                 key={i}
-                className="glass-card p-10 rounded-[3rem] border-white/5 relative group hover:border-primary/20 hover:-translate-y-2 transition-all duration-500"
+                className="glass-p-6 sm:p-10 rounded-2xl sm:rounded-[3rem] border border-white/5 relative group hover:border-primary/20 transition-all duration-500 p-6 sm:p-10"
               >
-                {/* Stars */}
-                <div className="flex gap-1 mb-6">
-                  {Array.from({ length: t.stars }).map((_, s) => (
-                    <Star key={s} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                <div className="flex gap-1 mb-4 sm:mb-6">
+                  {Array.from({ length: 5 }).map((_, s) => (
+                    <Star key={s} className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <p className="text-lg font-semibold mb-8 text-foreground/90 leading-relaxed italic">
+                <p className="text-base sm:text-lg font-semibold mb-6 sm:mb-8 text-foreground/90 leading-relaxed italic">
                   "{t.quote}"
                 </p>
-                <div className="flex items-center gap-4">
-                  <div className="relative w-14 h-14 rounded-2xl overflow-hidden border-2 border-primary/20 shadow-xl">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-primary/20 shadow-xl">
                     <NextImage src={t.img} alt={t.name} fill className="object-cover" />
                   </div>
                   <div>
-                    <p className="font-black text-lg leading-tight">{t.name}</p>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-primary mt-0.5">{t.role}</p>
+                    <p className="font-black text-base sm:text-lg leading-tight">{t.name}</p>
+                    <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-primary mt-0.5">{t.role}</p>
                   </div>
-                </div>
-                {/* Decorative Quote */}
-                <div className="absolute top-6 right-8 text-primary/10 group-hover:text-primary/20 transition-colors">
-                  <svg className="w-16 h-16 fill-current" viewBox="0 0 24 24">
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                  </svg>
                 </div>
               </div>
             ))}
@@ -418,51 +401,33 @@ export default function CoursesPage() {
       </section>
 
       {/* ─── CTA BANNER ───────────────────────────────────────────────────── */}
-      <section className="relative z-10 py-28">
+      <section className="relative z-10 py-16 sm:py-28">
         <div className="container mx-auto px-4">
-          <div className="relative glass-card rounded-[4rem] p-16 lg:p-24 border-primary/20 overflow-hidden text-center">
-            {/* Background Gradients */}
+          <div className="relative glass-card rounded-[2.5rem] sm:rounded-[4rem] p-8 sm:p-16 lg:p-24 border-primary/20 overflow-hidden text-center">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-pink-500/10 opacity-60 pointer-events-none" />
-            <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse-slow pointer-events-none" />
-            <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-violet-600/15 rounded-full blur-[120px] animate-float pointer-events-none" />
-            {/* Top Line */}
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
 
             <div className="relative z-10 max-w-3xl mx-auto">
-              <Badge className="glass border-primary/20 text-primary font-black uppercase tracking-[0.3em] text-[9px] px-5 py-2 mb-8 inline-flex">
-                Join the 1% of Engineers
+              <Badge className="glass border-primary/20 text-primary font-black uppercase tracking-[0.3em] text-[8px] sm:text-[9px] px-4 py-1.5 sm:px-5 sm:py-2 mb-6 sm:mb-8 inline-flex">
+                Join the 1%
               </Badge>
-              <h2 className="text-4xl md:text-7xl font-black mb-8 tracking-tighter leading-[0.95]">
+              <h2 className="text-3xl xs:text-4xl md:text-7xl font-black mb-6 sm:mb-8 tracking-tighter leading-[0.95]">
                 Ready to Build{" "}
                 <span className="text-gradient">Something Iconic?</span>
               </h2>
-              <p className="text-xl mb-12 text-muted-foreground font-medium leading-relaxed">
-                Enroll today and get instant access to our entire ecosystem.
+              <p className="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-muted-foreground font-medium leading-relaxed px-2">
                 The future belongs to those who build it.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/sign-up">
+                <Link href="/sign-up" className="w-full sm:w-auto">
                   <Button
                     size="lg"
-                    className="h-18 px-12 rounded-[1.75rem] text-base font-black uppercase tracking-widest bg-primary hover:bg-primary/90 shadow-[0_0_40px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_60px_hsl(var(--primary)/0.5)] group transition-all"
+                    className="h-14 sm:h-18 w-full sm:w-auto px-8 sm:px-12 rounded-xl sm:rounded-[1.75rem] text-sm sm:text-base font-black uppercase tracking-widest bg-primary hover:bg-primary/90 shadow-[0_0_30px_hsl(var(--primary)/0.4)] group transition-all"
                   >
-                    Start Your Journey
-                    <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-2 transition-transform" />
-                  </Button>
-                </Link>
-                <Link href="/courses">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="h-18 px-12 rounded-[1.75rem] text-base font-black uppercase tracking-widest glass border-white/10 hover:border-primary/30 hover:bg-primary/5 transition-all"
-                  >
-                    Browse Free Modules
+                    Start Path
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3 group-hover:translate-x-2 transition-transform" />
                   </Button>
                 </Link>
               </div>
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-muted-foreground opacity-40 mt-10">
-                No Lock-In • Cancel Anytime • Expert Support
-              </p>
             </div>
           </div>
         </div>

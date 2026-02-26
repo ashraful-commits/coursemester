@@ -149,35 +149,35 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
         </Link>
       </CardHeader>
 
-      <CardContent className="p-8 flex-grow relative z-10 flex flex-col">
+      <CardContent className="p-5 sm:p-8 flex-grow relative z-10 flex flex-col">
         <Link href={`/courses/${course.id}`}>
-          <h3 className="font-black text-2xl line-clamp-2 mb-4 group-hover:text-primary transition-colors leading-[1.15] tracking-tight">
+          <h3 className="font-black text-xl sm:text-2xl line-clamp-2 mb-3 sm:mb-4 group-hover:text-primary transition-colors leading-[1.15] tracking-tight">
             {course.title}
           </h3>
         </Link>
 
-        <p className="text-[13px] text-muted-foreground line-clamp-2 mb-8 font-medium leading-relaxed opacity-60">
+        <p className="text-xs sm:text-[13px] text-muted-foreground line-clamp-2 mb-6 sm:mb-8 font-medium leading-relaxed opacity-60">
           {course.description}
         </p>
 
-        <div className="mt-auto grid grid-cols-2 gap-4 text-[10px] text-muted-foreground font-black uppercase tracking-[0.15em] opacity-80">
-          <div className="flex items-center gap-2.5 bg-white/5 border border-white/5 p-3 rounded-2xl justify-center group-hover:bg-primary/10 group-hover:border-primary/20 transition-all">
-            <Tv className="h-3.5 w-3.5 text-primary" />
-            <span>{totalLessons} Nodes</span>
+        <div className="mt-auto grid grid-cols-2 gap-3 sm:gap-4 text-[9px] sm:text-[10px] text-muted-foreground font-black uppercase tracking-[0.15em] opacity-80">
+          <div className="flex items-center gap-2 sm:gap-2.5 bg-white/5 border border-white/5 p-2 sm:p-3 rounded-xl sm:rounded-2xl justify-center group-hover:bg-primary/10 group-hover:border-primary/20 transition-all">
+            <Tv className="h-3 sm:h-3.5 w-3 sm:w-3.5 text-primary" />
+            <span className="truncate">{totalLessons} Nodes</span>
           </div>
-          <div className="flex items-center gap-2.5 bg-white/5 border border-white/5 p-3 rounded-2xl justify-center group-hover:bg-primary/10 group-hover:border-primary/20 transition-all">
-            <Clock className="h-3.5 w-3.5 text-primary" />
-            <span>{Math.floor(totalDuration / 60)}h Sync</span>
+          <div className="flex items-center gap-2 sm:gap-2.5 bg-white/5 border border-white/5 p-2 sm:p-3 rounded-xl sm:rounded-2xl justify-center group-hover:bg-primary/10 group-hover:border-primary/20 transition-all">
+            <Clock className="h-3 sm:h-3.5 w-3 sm:w-3.5 text-primary" />
+            <span className="truncate">{Math.floor(totalDuration / 60)}h Sync</span>
           </div>
         </div>
 
         {variant === "enrolled" && course.progress !== undefined && (
-          <div className="space-y-4 mt-8 pt-6 border-t border-white/5">
-            <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-[0.2em]">
-              <span className="text-muted-foreground leading-none">Flow Synchronization</span>
+          <div className="space-y-3 sm:space-y-4 mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/5">
+            <div className="flex items-center justify-between text-[8px] sm:text-[10px] font-black uppercase tracking-[0.2em]">
+              <span className="text-muted-foreground leading-none">Synchronization</span>
               <span className="text-primary leading-none">{Math.round(course.progress)}%</span>
             </div>
-            <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden ring-1 ring-white/5">
+            <div className="h-1.5 sm:h-2 w-full bg-white/5 rounded-full overflow-hidden ring-1 ring-white/5">
               <div
                 className={`h-full transition-all duration-1000 ease-out ${course.progress === 100 ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' : 'bg-primary shadow-[0_0_10px_rgba(124,58,237,0.5)]'
                   }`}
@@ -188,18 +188,18 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
         )}
       </CardContent>
 
-      <CardFooter className="p-8 pt-0 mt-auto relative z-10">
-        <div className="flex items-center justify-between w-full pt-8 border-t border-white/5">
+      <CardFooter className="p-5 sm:p-8 pt-0 mt-auto relative z-10">
+        <div className="flex items-center justify-between w-full pt-5 sm:pt-8 border-t border-white/5">
           <div className="flex flex-col">
-            <span className="text-[9px] uppercase tracking-[0.2em] text-muted-foreground font-black mb-1 opacity-60 leading-none">Access Level</span>
-            <span className="text-2xl font-black text-foreground group-hover:text-primary transition-colors leading-none tracking-tighter">
+            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-muted-foreground font-black mb-1 opacity-60 leading-none">Access Level</span>
+            <span className="text-xl sm:text-2xl font-black text-foreground group-hover:text-primary transition-colors leading-none tracking-tighter">
               {course.price > 0 ? formatPrice(course.price) : "Industrial"}
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 text-yellow-500 bg-yellow-500/10 px-3 py-1.5 rounded-xl shadow-lg border border-yellow-500/10">
-              <Star className="h-3.5 w-3.5 fill-current" />
-              <span className="font-black text-xs leading-none">{avgRating.toFixed(1)}</span>
+            <div className="flex items-center gap-1 sm:gap-1.5 text-yellow-500 bg-yellow-500/10 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl shadow-lg border border-yellow-500/10">
+              <Star className="h-3 sm:h-3.5 w-3 sm:w-3.5 fill-current" />
+              <span className="font-black text-[10px] sm:text-xs leading-none">{avgRating.toFixed(1)}</span>
             </div>
           </div>
         </div>
