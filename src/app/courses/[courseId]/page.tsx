@@ -574,7 +574,7 @@ export default function CourseDetail({
                       </p>
                       <div className="flex items-center gap-5">
                         <div className="relative w-16 h-16 rounded-2xl overflow-hidden border-2 border-primary/20 shadow-xl">
-                          <NextImage src={review.user.image} alt={review.user.name} fill className="object-cover" />
+                          <NextImage src={review.user.image || ""} alt={review.user.name} fill className="object-cover" />
                         </div>
                         <div>
                           <p className="font-black text-2xl tracking-tighter">{review.user.name}</p>
@@ -593,7 +593,7 @@ export default function CourseDetail({
             <div className="lg:sticky top-32">
               <Card className="overflow-hidden rounded-[3rem] border-primary/20 bg-background/50 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] ring-1 ring-white/10 group">
                 <CardHeader className="p-0 relative h-64 overflow-hidden">
-                  <NextImage src={course.imageUrl} alt={course.title} fill className="object-cover group-hover:scale-105 transition-transform duration-1000" />
+                  <NextImage src={course.imageUrl || ""} alt={course.title} fill className="object-cover group-hover:scale-105 transition-transform duration-1000" />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <Button variant="outline" size="xl" className="glass border-white/20 rounded-full h-20 w-20 p-0 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group/play">
