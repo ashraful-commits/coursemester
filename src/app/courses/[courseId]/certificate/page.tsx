@@ -98,7 +98,7 @@ export default function CertificatePage({ params }: { params: Promise<{ courseId
                 <div className="max-w-5xl mx-auto print:max-w-none">
                     {/* Certificate Preview */}
                     <div className="relative mb-10 animate-fadeInUp print:m-0 print:animate-none">
-                        <div className="certificate-wrap glass-card rounded-[3rem] border-amber-400/20 overflow-hidden shadow-[0_0_80px_rgba(251,191,36,0.1)] relative print:bg-white/[0.04]">
+                        <div className="certificate-wrap glass-card rounded-[3rem] border-amber-400/20 overflow-hidden relative print:bg-white/[0.04] dark:bg-white/[0.04] bg-white border-white/20 dark:border-amber-400/20 shadow-2xl dark:shadow-[0_0_80px_rgba(251,191,36,0.1)]">
                             {/* Top gradient bar */}
                             <div className="h-2 bg-gradient-to-r from-amber-400 via-yellow-300 to-orange-400" />
 
@@ -118,17 +118,17 @@ export default function CertificatePage({ params }: { params: Promise<{ courseId
                                 </div>
 
                                 {/* Certificate Content */}
-                                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground opacity-50 mb-3">
+                                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground opacity-50 mb-3 dark:text-muted-foreground text-amber-800">
                                     CodeMaster · Certificate of Completion
                                 </p>
-                                <p className="text-xl font-semibold text-muted-foreground mb-4">This is to certify that</p>
+                                <p className="text-xl font-semibold text-muted-foreground mb-4 dark:text-muted-foreground text-gray-500">This is to certify that</p>
                                 <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-gradient-gold mb-4">
                                     {cert.studentName}
                                 </h2>
-                                <p className="text-xl font-semibold text-muted-foreground mb-6">
+                                <p className="text-xl font-semibold text-muted-foreground mb-6 dark:text-muted-foreground text-gray-500">
                                     has successfully completed the course
                                 </p>
-                                <h3 className="text-3xl md:text-4xl font-black tracking-tight mb-10 max-w-2xl mx-auto">
+                                <h3 className="text-3xl md:text-4xl font-black tracking-tight mb-10 max-w-2xl mx-auto dark:text-foreground text-gray-900">
                                     {cert.courseTitle}
                                 </h3>
 
@@ -136,41 +136,41 @@ export default function CertificatePage({ params }: { params: Promise<{ courseId
                                 <div className="flex justify-center gap-10 mb-10">
                                     <div className="text-center">
                                         <div className="text-2xl font-black text-amber-400">{cert.courseHours}h</div>
-                                        <div className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-50 mt-1">Total Hours</div>
+                                        <div className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-50 mt-1 dark:text-muted-foreground text-gray-400">Total Hours</div>
                                     </div>
-                                    <div className="w-px bg-white/10" />
+                                    <div className="w-px bg-white/10 dark:bg-white/10 bg-gray-200" />
                                     <div className="text-center">
                                         <div className="flex justify-center mb-1">
                                             {[...Array(5)].map((_, i) => (
                                                 <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
                                             ))}
                                         </div>
-                                        <div className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-50">With Distinction</div>
+                                        <div className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-50 dark:text-muted-foreground text-gray-400">With Distinction</div>
                                     </div>
-                                    <div className="w-px bg-white/10" />
+                                    <div className="w-px bg-white/10 dark:bg-white/10 bg-gray-200" />
                                     <div className="text-center">
                                         <div className="text-2xl font-black text-amber-400">{cert.completedDate.split(" ")[2]}</div>
-                                        <div className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-50 mt-1">{cert.completedDate.split(" ").slice(0, 2).join(" ")}</div>
+                                        <div className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-50 mt-1 dark:text-muted-foreground text-gray-400">{cert.completedDate.split(" ").slice(0, 2).join(" ")}</div>
                                     </div>
                                 </div>
 
                                 {/* Signatures */}
                                 <div className="flex justify-center gap-20">
                                     <div className="text-center">
-                                        <div className="text-2xl font-black tracking-tighter text-foreground/80 mb-1 italic" style={{ fontFamily: "cursive" }}>
+                                        <div className="text-2xl font-black tracking-tighter text-foreground/80 mb-1 italic dark:text-foreground/80 text-gray-800" style={{ fontFamily: "cursive" }}>
                                             {cert.instructorName}
                                         </div>
-                                        <div className="h-px w-32 bg-white/20 mb-2" />
-                                        <div className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-50">
+                                        <div className="h-px w-32 bg-white/20 dark:bg-white/20 bg-gray-300 mb-2" />
+                                        <div className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-50 dark:text-muted-foreground text-gray-400">
                                             Lead Instructor
                                         </div>
                                     </div>
                                     <div className="text-center">
-                                        <div className="text-2xl font-black tracking-tighter text-foreground/80 mb-1 italic" style={{ fontFamily: "cursive" }}>
+                                        <div className="text-2xl font-black tracking-tighter text-foreground/80 mb-1 italic dark:text-foreground/80 text-gray-800" style={{ fontFamily: "cursive" }}>
                                             CodeMaster
                                         </div>
-                                        <div className="h-px w-32 bg-white/20 mb-2" />
-                                        <div className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-50">
+                                        <div className="h-px w-32 bg-white/20 dark:bg-white/20 bg-gray-300 mb-2" />
+                                        <div className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-50 dark:text-muted-foreground text-gray-400">
                                             Platform Director
                                         </div>
                                     </div>
@@ -178,7 +178,7 @@ export default function CertificatePage({ params }: { params: Promise<{ courseId
 
                                 {/* Certificate ID */}
                                 <div className="absolute bottom-6 right-8">
-                                    <p className="text-[8px] font-mono text-muted-foreground opacity-30">ID: {cert.certificateId}</p>
+                                    <p className="text-[8px] font-mono text-muted-foreground opacity-30 dark:text-muted-foreground text-gray-400">ID: {cert.certificateId}</p>
                                 </div>
                             </div>
                         </div>

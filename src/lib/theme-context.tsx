@@ -130,6 +130,9 @@ const defaultThemes: Record<ColorTheme, ThemeConfig> = {
 interface ThemeContextType {
   colorTheme: ColorTheme
   setColorTheme: (theme: ColorTheme) => void
+  themeMode: 'light' | 'dark'
+  setThemeMode: (mode: 'light' | 'dark') => void
+  toggleThemeMode: () => void
   themeConfig: ThemeConfig
   updateCustomTheme: (config: Partial<ThemeConfig>) => void
   availableThemes: Record<ColorTheme, ThemeConfig>
@@ -148,20 +151,31 @@ export function useTheme() {
 interface ThemeProviderProps {
   children: React.ReactNode
   defaultTheme?: ColorTheme
+  defaultMode?: 'light' | 'dark'
 }
 
-export function DynamicThemeProvider({ children, defaultTheme = 'blue' }: ThemeProviderProps) {
+export function DynamicThemeProvider({
+  children,
+  defaultTheme = 'blue',
+  defaultMode = 'dark'
+}: ThemeProviderProps) {
   const [colorTheme, setColorTheme] = useState<ColorTheme>(defaultTheme)
+  const [themeMode, setThemeMode] = useState<'light' | 'dark'>(defaultMode)
   const [customThemeConfig, setCustomThemeConfig] = useState<ThemeConfig>(defaultThemes.blue)
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('color-theme') as ColorTheme
+    const savedMode = localStorage.getItem('theme-mode') as 'light' | 'dark'
     const savedCustomConfig = localStorage.getItem('custom-theme-config')
-    
+
     if (savedTheme && defaultThemes[savedTheme]) {
       setColorTheme(savedTheme)
     }
-    
+
+    if (savedMode) {
+      setThemeMode(savedMode)
+    }
+
     if (savedCustomConfig) {
       try {
         setCustomThemeConfig(JSON.parse(savedCustomConfig))
@@ -173,16 +187,24 @@ export function DynamicThemeProvider({ children, defaultTheme = 'blue' }: ThemeP
 
   useEffect(() => {
     localStorage.setItem('color-theme', colorTheme)
+    localStorage.setItem('theme-mode', themeMode)
     if (colorTheme === 'custom') {
       localStorage.setItem('custom-theme-config', JSON.stringify(customThemeConfig))
     }
-    
+
     const root = document.documentElement
     const config = colorTheme === 'custom' ? customThemeConfig : defaultThemes[colorTheme]
-    
+
     // Disable transitions temporarily to prevent flashing
     root.classList.add('no-transition')
-    
+
+    // Handle Mode
+    if (themeMode === 'light') {
+      root.classList.add('light')
+    } else {
+      root.classList.remove('light')
+    }
+
     // Update CSS variables
     root.style.setProperty('--primary', config.primary)
     root.style.setProperty('--primary-foreground', config.primaryForeground)
@@ -190,7 +212,7 @@ export function DynamicThemeProvider({ children, defaultTheme = 'blue' }: ThemeP
     root.style.setProperty('--secondary-foreground', config.secondaryForeground)
     root.style.setProperty('--accent', config.accent)
     root.style.setProperty('--accent-foreground', config.accentForeground)
-    
+
     root.style.setProperty('--brand-blue-50', config.brand['50'])
     root.style.setProperty('--brand-blue-100', config.brand['100'])
     root.style.setProperty('--brand-blue-500', config.brand['500'])
@@ -199,12 +221,16 @@ export function DynamicThemeProvider({ children, defaultTheme = 'blue' }: ThemeP
     if (config.brand['900']) {
       root.style.setProperty('--brand-blue-900', config.brand['900'])
     }
-    
+
     // Re-enable transitions after theme is applied
     setTimeout(() => {
       root.classList.remove('no-transition')
     }, 50)
-  }, [colorTheme, customThemeConfig])
+  }, [colorTheme, customThemeConfig, themeMode])
+
+  const toggleThemeMode = () => {
+    setThemeMode(prev => prev === 'light' ? 'dark' : 'light')
+  }
 
   const updateCustomTheme = (config: Partial<ThemeConfig>) => {
     setCustomThemeConfig(prev => ({ ...prev, ...config }))
@@ -216,6 +242,9 @@ export function DynamicThemeProvider({ children, defaultTheme = 'blue' }: ThemeP
     <ThemeContext.Provider value={{
       colorTheme,
       setColorTheme,
+      themeMode,
+      setThemeMode,
+      toggleThemeMode,
       themeConfig,
       updateCustomTheme,
       availableThemes: defaultThemes
