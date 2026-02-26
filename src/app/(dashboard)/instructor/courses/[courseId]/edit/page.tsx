@@ -57,7 +57,7 @@ export default function CourseEditorPage({ params }: { params: Promise<{ courseI
             </div>
 
             {/* Editor Header */}
-            <div className="relative z-40 pt-20 pb-4 sm:pt-32 sm:pb-6 border-b border-white/5 bg-background/80 backdrop-blur-xl fixed top-0 left-0 right-0 px-4 sm:px-8 flex items-center justify-between min-h-[80px] sm:min-h-[100px] mt-16 sm:mt-24">
+            <div className="relative z-40 pt-20 pb-4 sm:pt-32 sm:pb-6 border-b border-white/5 bg-background/80 backdrop-blur-xl fixed top-0 left-0 right-0 px-4 sm:px-8 flex items-center justify-between min-h-[80px] sm:min-h-[100px] mt-16 sm:mt-20 lg:mt-24">
                 <div className="flex items-center gap-3 sm:gap-6 overflow-hidden">
                     <Link href="/instructor" className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 glass rounded-lg sm:rounded-xl flex items-center justify-center text-muted-foreground hover:text-primary transition-all">
                         <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -83,7 +83,7 @@ export default function CourseEditorPage({ params }: { params: Promise<{ courseI
             </div>
 
             {/* Mobile Nav - Visible only on small screens */}
-            <div className="fixed top-[156px] sm:top-[196px] left-0 right-0 z-30 bg-background/50 backdrop-blur-md border-b border-white/5 xl:hidden">
+            <div className="fixed top-[144px] sm:top-[180px] lg:top-[220px] left-0 right-0 z-30 bg-background/50 backdrop-blur-md border-b border-white/5 xl:hidden">
                 <div className="flex overflow-x-auto no-scrollbar px-4 py-3 gap-2">
                     {[
                         { id: "curriculum", label: "Curriculum", icon: Layers },
@@ -106,7 +106,7 @@ export default function CourseEditorPage({ params }: { params: Promise<{ courseI
             </div>
 
             {/* Sidebar Nav - Desktop Only */}
-            <div className="fixed top-44 left-0 bottom-0 w-72 border-r border-white/5 bg-background/50 backdrop-blur-md z-30 p-8 pt-10 hidden xl:block">
+            <div className="fixed top-36 sm:top-40 lg:top-44 left-0 bottom-0 w-72 border-r border-white/5 bg-background/50 backdrop-blur-md z-30 p-8 pt-10 hidden xl:block">
                 <div className="space-y-2">
                     {[
                         { id: "curriculum", label: "Curriculum Builder", icon: Layers },
@@ -142,7 +142,7 @@ export default function CourseEditorPage({ params }: { params: Promise<{ courseI
             </div>
 
             {/* Main Content Area */}
-            <div className="flex-1 mt-[210px] sm:mt-44 xl:pl-80 pt-6 sm:pt-10 container max-w-5xl mx-auto px-4 sm:px-8">
+            <div className="flex-1 mt-[200px] sm:mt-48 lg:mt-52 xl:pl-80 pt-6 sm:pt-10 container max-w-5xl mx-auto px-4 sm:px-8">
                 {activeTab === "curriculum" && (
                     <div className="space-y-8 sm:space-y-12 animate-fadeInUp">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">

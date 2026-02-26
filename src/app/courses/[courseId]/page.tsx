@@ -281,7 +281,7 @@ export default function CourseDetail({
       </div>
 
       {/* Course Hero */}
-      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-24 lg:pt-40 lg:pb-32 z-10 overflow-hidden">
+      <section className="relative pt-12 pb-12 sm:pt-20 lg:pt-32 lg:pb-32 z-10 overflow-hidden">
         <div className="container mx-auto px-4">
           <Link
             href="/courses"

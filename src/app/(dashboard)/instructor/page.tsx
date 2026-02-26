@@ -167,7 +167,7 @@ export default function InstructorDashboard() {
       </div>
 
       {/* ─── HEADER ──────────────────────────────────────────────────────── */}
-      <div className="relative z-10 pt-24 pb-8 sm:pt-32 sm:pb-14 border-b border-white/5 bg-white/[0.01] backdrop-blur-2xl">
+      <div className="relative z-10 pt-12 pb-8 sm:pt-20 sm:pb-14 border-b border-white/5 bg-white/[0.01] backdrop-blur-2xl">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 sm:gap-10">
             <div className="animate-fadeInUp">

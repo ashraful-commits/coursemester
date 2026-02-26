@@ -57,7 +57,7 @@ function SearchResults() {
             </div>
 
             {/* Header / Search Bar */}
-            <div className="relative z-10 pt-32 pb-10 border-b border-white/5 bg-white/[0.01] backdrop-blur-2xl">
+            <div className="relative z-10 pt-12 pb-10 border-b border-white/5 bg-white/[0.01] backdrop-blur-2xl">
                 <div className="container mx-auto px-4">
                     <div className="max-w-3xl">
                         <div className="relative mb-6">
@@ -113,8 +113,8 @@ function SearchResults() {
                                             key={level}
                                             onClick={() => setActiveLevel(level)}
                                             className={`w-full flex items-center gap-3 p-3 rounded-xl text-left text-[11px] font-black uppercase tracking-widest transition-all ${activeLevel === level
-                                                    ? "bg-primary/10 text-primary border border-primary/20"
-                                                    : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                                                ? "bg-primary/10 text-primary border border-primary/20"
+                                                : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
                                                 }`}
                                         >
                                             <div className={`w-4 h-4 rounded flex items-center justify-center border transition-all ${activeLevel === level ? "bg-primary border-primary" : "border-white/20"
@@ -136,8 +136,8 @@ function SearchResults() {
                                             key={price ?? "any"}
                                             onClick={() => setMaxPrice(price)}
                                             className={`w-full flex items-center gap-3 p-3 rounded-xl text-left text-[11px] font-black uppercase tracking-widest transition-all ${maxPrice === price
-                                                    ? "bg-primary/10 text-primary border border-primary/20"
-                                                    : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                                                ? "bg-primary/10 text-primary border border-primary/20"
+                                                : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
                                                 }`}
                                         >
                                             <div className={`w-4 h-4 rounded flex items-center justify-center border transition-all ${maxPrice === price ? "bg-primary border-primary" : "border-white/20"

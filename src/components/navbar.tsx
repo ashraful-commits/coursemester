@@ -81,33 +81,33 @@ export function Navbar() {
       {/* ─── GLOBAL SEARCH OVERLAY ───────────────────────────────── */}
       {searchOpen && (
         <div
-          className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-md flex items-start justify-center pt-32 px-4"
+          className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-md flex items-start justify-center pt-20 sm:pt-32 px-4"
           onClick={() => setSearchOpen(false)}
         >
           <div
-            className="w-full max-w-2xl glass-card rounded-3xl border-primary/20 shadow-[0_30px_80px_rgba(0,0,0,0.7)] overflow-hidden animate-fadeInDown"
+            className="w-full max-w-2xl glass-card rounded-2xl sm:rounded-3xl border-primary/20 shadow-[0_30px_80px_rgba(0,0,0,0.7)] overflow-hidden animate-fadeInDown"
             onClick={(e) => e.stopPropagation()}
           >
-            <form onSubmit={handleSearch} className="flex items-center gap-4 p-5">
-              <Search className="w-5 h-5 text-primary shrink-0" />
+            <form onSubmit={handleSearch} className="flex items-center gap-3 sm:gap-4 p-4 sm:p-5">
+              <Search className="w-4 h-4 sm:w-5 h-5 text-primary shrink-0" />
               <input
                 ref={searchInputRef}
                 type="text"
-                placeholder="Search courses, topics, skills..."
+                placeholder="Search modules..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 bg-transparent text-lg font-semibold placeholder:text-muted-foreground/40 outline-none"
+                className="flex-1 bg-transparent text-base sm:text-lg font-semibold placeholder:text-muted-foreground/40 outline-none"
               />
               <button type="button" onClick={() => setSearchOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">
                 <X className="w-5 h-5" />
               </button>
             </form>
-            <div className="px-5 pb-4 flex items-center gap-4 border-t border-white/5 pt-4">
+            <div className="px-4 pb-4 sm:px-5 sm:pb-4 flex flex-wrap items-center gap-2 sm:gap-4 border-t border-white/5 pt-4">
               {["React", "Python", "DevOps", "AI", "TypeScript"].map((tag) => (
                 <button
                   key={tag}
                   onClick={() => { router.push(`/search?q=${tag}`); setSearchOpen(false); }}
-                  className="text-[10px] font-black uppercase tracking-widest glass border border-white/10 hover:border-primary/30 text-muted-foreground hover:text-primary px-3 py-1.5 rounded-xl transition-all"
+                  className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest glass border border-white/10 hover:border-primary/30 text-muted-foreground hover:text-primary px-2.5 py-1.5 rounded-lg sm:rounded-xl transition-all"
                 >
                   {tag}
                 </button>
@@ -120,20 +120,20 @@ export function Navbar() {
       <header
         className={`fixed top-0 z-50 w-full transition-all duration-500 print:hidden ${scrolled
           ? "glass border-b border-white/5 shadow-[0_4px_40px_rgba(0,0,0,0.3)] bg-background/80 backdrop-blur-2xl py-0"
-          : "bg-transparent backdrop-blur-sm py-2"
+          : "bg-transparent backdrop-blur-sm py-1 sm:py-2"
           }`}
       >
-        <div className="container mx-auto px-4 h-24 flex items-center justify-between gap-4">
+        <div className="container mx-auto px-4 h-16 sm:h-20 lg:h-24 flex items-center justify-between gap-4">
           {/* ─── LOGO ──────────────────────────────────────────────── */}
-          <Link href="/" className="flex items-center gap-3 font-black text-2xl group shrink-0">
-            <div className="relative flex items-center justify-center w-11 h-11 rounded-[14px] bg-primary text-primary-foreground group-hover:rotate-12 transition-all duration-500 shadow-[0_0_20px_hsl(var(--primary)/0.4)]">
-              <BookOpen className="h-6 w-6" />
-              <span className="absolute -top-1 -right-1 flex h-3 w-3">
+          <Link href="/" className="flex items-center gap-2 sm:gap-3 font-black text-xl sm:text-2xl group shrink-0">
+            <div className="relative flex items-center justify-center w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-[14px] bg-primary text-primary-foreground group-hover:rotate-12 transition-all duration-500 shadow-[0_0_20px_hsl(var(--primary)/0.4)]">
+              <BookOpen className="h-5 w-5 sm:h-6 sm:w-6" />
+              <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5 sm:h-3 sm:w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-50" />
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-primary" />
+                <span className="relative inline-flex rounded-full h-full w-full bg-primary" />
               </span>
             </div>
-            <span className="text-gradient tracking-tighter hidden sm:block">CodeMaster</span>
+            <span className="text-gradient tracking-tighter hidden xs:block">CodeMaster</span>
           </Link>
 
           {/* ─── NAV LINKS ─────────────────────────────────────────── */}

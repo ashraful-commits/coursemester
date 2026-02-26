@@ -68,7 +68,7 @@ export default function WishlistPage() {
             </div>
 
             {/* Header */}
-            <div className="relative z-10 pt-32 pb-12 border-b border-white/5 bg-white/[0.01] backdrop-blur-xl">
+            <div className="relative z-10 pt-12 pb-12 border-b border-white/5 bg-white/[0.01] backdrop-blur-xl">
                 <div className="container mx-auto px-4">
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/20 mb-5">
                         <Heart className="w-3 h-3 text-pink-400" />

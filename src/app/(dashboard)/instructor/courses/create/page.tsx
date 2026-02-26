@@ -48,7 +48,7 @@ export default function CreateCoursePage() {
                 <div className="absolute bottom-0 left-0 w-[40%] h-[40%] bg-violet-600/5 rounded-full blur-[120px] animate-float" />
             </div>
 
-            <div className="relative z-10 pt-24 pb-10 sm:pt-32 sm:pb-12 border-b border-white/5 bg-white/[0.01] backdrop-blur-xl">
+            <div className="relative z-10 pt-12 pb-10 sm:pt-20 sm:pb-12 border-b border-white/5 bg-white/[0.01] backdrop-blur-xl">
                 <div className="container mx-auto px-4">
                     <Link href="/instructor">
                         <Button variant="ghost" className="mb-6 sm:mb-8 text-muted-foreground hover:text-primary font-black uppercase tracking-widest text-[9px] sm:text-[10px] -ml-2 sm:-ml-3 h-10 group">

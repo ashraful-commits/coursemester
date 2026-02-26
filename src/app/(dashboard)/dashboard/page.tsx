@@ -91,7 +91,7 @@ export default function MyLearningPage() {
       </div>
 
       {/* Header */}
-      <div className="relative z-10 pt-24 pb-8 sm:pt-32 sm:pb-14 border-b border-white/5 bg-white/[0.01] backdrop-blur-2xl">
+      <div className="relative z-10 pt-12 pb-8 sm:pt-20 sm:pb-14 border-b border-white/5 bg-white/[0.01] backdrop-blur-2xl">
         <div className="container mx-auto px-4">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-6">
             <Target className="w-3 h-3 text-primary" />

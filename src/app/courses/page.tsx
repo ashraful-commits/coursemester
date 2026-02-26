@@ -157,7 +157,7 @@ export default function CoursesPage() {
       </div>
 
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative pt-24 pb-12 lg:pt-52 lg:pb-36 z-10">
+      <section className="relative pt-12 pb-12 sm:pt-20 lg:pt-40 lg:pb-36 z-10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full glass border-primary/20 mb-6 sm:mb-8 animate-fadeIn">
@@ -202,7 +202,7 @@ export default function CoursesPage() {
       </section>
 
       {/* ─── STICKY SEARCH BAR ────────────────────────────────────────────── */}
-      <div className="sticky top-16 sm:top-24 z-40 py-3 sm:py-5 glass border-y border-white/5 bg-background/60 backdrop-blur-xl">
+      <div className="sticky top-16 sm:top-20 lg:top-24 z-40 py-3 sm:py-5 glass border-y border-white/5 bg-background/60 backdrop-blur-xl">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
             {/* Search */}
