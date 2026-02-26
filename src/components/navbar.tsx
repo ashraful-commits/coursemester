@@ -73,6 +73,7 @@ export function Navbar() {
   const navLinks = [
     { href: "/courses", label: "Modules", icon: BookMarked },
     { href: "/instructor", label: "Instruct", icon: GraduationCap, role: "INSTRUCTOR" },
+    { href: "/admin", label: "Admin", icon: Settings, role: "ADMIN" },
     { href: "/dashboard", label: "My Progress", icon: Zap },
   ];
 

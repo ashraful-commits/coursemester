@@ -125,7 +125,7 @@ export function Footer() {
                                 <p className="text-sm text-muted-foreground font-medium opacity-60">New courses, discounts, and learning tips — weekly.</p>
                             </div>
                         </div>
-                        <div className="flex gap-3 w-full md:w-auto">
+                        <div className="flex gap-3 w-full md:w-auto sm:flex-col">
                             <input
                                 type="email"
                                 placeholder="your@email.com"

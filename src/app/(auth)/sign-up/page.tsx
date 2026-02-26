@@ -13,6 +13,7 @@ export default function SignUp() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [role, setRole] = useState("STUDENT")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const router = useRouter()
@@ -33,7 +34,7 @@ export default function SignUp() {
       const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, password, role }),
       })
 
       if (response.ok) {
@@ -157,6 +158,46 @@ export default function SignUp() {
                     minLength={6}
                   />
                   <p className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-muted-foreground/40 ml-2">Minimum 6-bit entropy required</p>
+                </div>
+
+                <div className="space-y-4">
+                  <Label className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-muted-foreground ml-2">Clearance Level (Role)</Label>
+                  <div className="grid grid-cols-2 gap-4">
+                    <button
+                      type="button"
+                      onClick={() => setRole("STUDENT")}
+                      className={`group relative p-4 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center gap-2 ${role === "STUDENT"
+                          ? "bg-primary/20 border-primary shadow-[0_0_20px_rgba(124,58,237,0.2)]"
+                          : "bg-white/5 border-white/10 hover:border-white/20"
+                        }`}
+                    >
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${role === "STUDENT" ? "bg-primary text-primary-foreground" : "bg-white/5 text-muted-foreground"
+                        }`}>
+                        <Zap className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className={`text-[10px] font-black uppercase tracking-widest ${role === "STUDENT" ? "text-primary" : "text-muted-foreground"}`}>Student</p>
+                        <p className="text-[8px] font-bold opacity-40 leading-none mt-1">Acquire Skills</p>
+                      </div>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setRole("INSTRUCTOR")}
+                      className={`group relative p-4 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center gap-2 ${role === "INSTRUCTOR"
+                          ? "bg-violet-500/20 border-violet-500 shadow-[0_0_20px_rgba(139,92,246,0.2)]"
+                          : "bg-white/5 border-white/10 hover:border-white/20"
+                        }`}
+                    >
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${role === "INSTRUCTOR" ? "bg-violet-500 text-white" : "bg-white/5 text-muted-foreground"
+                        }`}>
+                        <ShieldCheck className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className={`text-[10px] font-black uppercase tracking-widest ${role === "INSTRUCTOR" ? "text-violet-400" : "text-muted-foreground"}`}>Instructor</p>
+                        <p className="text-[8px] font-bold opacity-40 leading-none mt-1">Architect Courses</p>
+                      </div>
+                    </button>
+                  </div>
                 </div>
 
                 {error && (
